@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>404 Not Found</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0f172a;
+      color: #fff;
+      font-family: "Segoe UI", sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    h1 {
+      font-size: 8rem;
+      margin: 0;
+      background: linear-gradient(90deg, #06b6d4, #3b82f6, #9333ea);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 2s infinite alternate;
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin-top: 0.5rem;
+      color: #cbd5e1;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.7rem 1.5rem;
+      background: #06b6d4;
+      color: #0f172a;
+      font-weight: bold;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    a:hover {
+      background: #3b82f6;
+      transform: scale(1.1);
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #06b6d4; }
+      to   { text-shadow: 0 0 20px #9333ea; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>404</h1>
+    <p>Oops! The page you’re looking for doesn’t exist.</p>
+    <a href="/">Back to Home</a>
+  </div>
+</body>
+</html>
