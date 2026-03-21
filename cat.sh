@@ -2562,6 +2562,6 @@ gs_start
     ${CM}${str}bash -c \"\$(wget -qO-  ${url}/${SCRIPT_DEPLOY_NAME})\"${CN}"
 }
 
-echo -e "--> ${CW}KASIH PAHAM BOSKUH${CN}"
+echo -e "--> ${CW}Join us - https://thc.org/ops${CN}"
 
 exit_code 0
