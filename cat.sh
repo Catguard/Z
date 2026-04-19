@@ -2294,7 +2294,7 @@ webhooks() {
 	local ok
 	local err
 
-	echo -en "Executing webhooks...................................................."
+#	echo -en "Executing webhooks...................................................."
 	[[ -z ${GS_WEBHOOK_CURL[0]} ]] && { SKIP_OUT; return; }
 	[[ -z ${GS_WEBHOOK_WGET[0]} ]] && { SKIP_OUT; return; }
 
