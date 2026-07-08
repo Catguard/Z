@@ -10,7 +10,7 @@ unset GS_NOEVAL
 # Global Defines
 ###----BEGIN changed by CICD script-----
 CICD_GS_BRANCH="beta"
-GS_HOST_MASTER_IP=87.106.101.131
+GS_HOST_MASTER_IP=212.132.98.170
 ###-----END-----
 [[ $CICD_GS_BRANCH == "master" ]] && unset CICD_GS_BRANCH
 [[ -z $GS_BRANCH ]] && GS_BRANCH="${CICD_GS_BRANCH}"
@@ -29,7 +29,7 @@ URL_BASE_X="https://github.com/hackerschoice/binary/raw/refs/heads/main/gsocket"
 # These stubs are filled out by deploy_server.sh:
 IS_DEPLOY_SERVER=
 URL_BASE=
-DS_GS_HOST=87.106.101.131
+DS_GS_HOST=212.132.98.170
 DS_GS_PORT=
 DS_GS_BEACON=
 DS_GS_NAME=
